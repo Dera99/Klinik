@@ -1,6 +1,7 @@
 
 package app.main;
 
+import app.form.Beranda;
 import app.form.Data_Pasien;
 import app.form.Jadwal_Pelayanan_admin;
 import app.form.Rekam_medis;
@@ -20,7 +21,7 @@ public class Dashboard extends javax.swing.JFrame {
             @Override
             public void selectedMenu(int index) {
                 if(index==0){
-                    mainBody.displayForm(new Jadwal_Pelayanan_admin(),"Data Barang");
+                    mainBody.displayForm(new Beranda(),"Beranda");
                 }else if(index==1){
                     mainBody.displayForm(new jadwal_dokter(),"Jadwal Dokter");
                 }else if(index==2){
@@ -29,6 +30,12 @@ public class Dashboard extends javax.swing.JFrame {
                     mainBody.displayForm(new Data_Pasien(),"Data Pasien");
                 }else if (index==4){
                     mainBody.displayForm(new Rekam_medis(),"Rekam Medis");
+                }else if (index==5){
+                     Login a = new Login();
+                    a.setVisible(true);
+//                    UserSession.setUserLogin("");
+//                    UserSession.setUserId(0);
+                    dispose();  
                 }
 //                else if(index == 2){
 //                    Login a = new Login();
@@ -39,7 +46,7 @@ public class Dashboard extends javax.swing.JFrame {
 //                }    
             }
         });
-        mainBody.displayForm(new Jadwal_Pelayanan_admin(),"Data Barang");
+        mainBody.displayForm(new Beranda(),"Beranda");
     }
 
     @SuppressWarnings("unchecked")

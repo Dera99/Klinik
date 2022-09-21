@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu("Jadwal Pelayanan", null, 2);
         addMenu("Data Pasien", null,3);
         addMenu("Rekam Medis", null,4);
-        
+        addMenu("Logout",null,5);
        
         //  add more menu here
         menu.repaint();

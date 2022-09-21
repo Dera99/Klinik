@@ -26,16 +26,18 @@ public class Jadwal_Pelayanan_admin extends Form {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
+                {null, "Pelayanan Umum", null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Hari & Jam Pelayanan", "", "", "Title 4"
             }
         ));
+        jTable1.setShowGrid(false);
         jScrollPane1.setViewportView(jTable1);
+        jTable1.getAccessibleContext().setAccessibleName("");
 
         jButton1.setText("Cetak");
 
