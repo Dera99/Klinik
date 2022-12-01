@@ -55,12 +55,14 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void initMenu() {
-        addMenu("Beranda", null, 0);;
-        addMenu("Jadwal Dokter", null, 1);
+        addMenu("Beranda", null, 0);
+        addMenu("Pendaftaran Pasien", null, 1);
         addMenu("Jadwal Pelayanan", null, 2);
-        addMenu("Data Pasien", null,3);
-        addMenu("Rekam Medis", null,4);
-        addMenu("Logout",null,5);
+        addMenu("Rekam Medis", null, 3);
+        addMenu("Data Pasien", null,4);
+        addMenu("Data Karyawan", null,5);
+        addMenu("Laporan", null,6);
+        addMenu("Logout",null,7);
        
         //  add more menu here
         menu.repaint();

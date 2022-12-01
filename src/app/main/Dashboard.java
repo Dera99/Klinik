@@ -2,10 +2,12 @@
 package app.main;
 
 import app.form.Beranda;
-import app.form.Data_Pasien;
-import app.form.Jadwal_Pelayanan_admin;
-import app.form.Rekam_medis;
-import app.form.jadwal_dokter;
+import app.form.DataPasien;
+import app.form.JadwalPelayanan;
+import app.form.Laporan;
+import app.form.RekamMedis;
+import app.form.DataKaryawan;
+import app.form.PendaftaranPasien;
 import app.menu.EventMenu;
 
 
@@ -23,14 +25,18 @@ public class Dashboard extends javax.swing.JFrame {
                 if(index==0){
                     mainBody.displayForm(new Beranda(),"Beranda");
                 }else if(index==1){
-                    mainBody.displayForm(new jadwal_dokter(),"Jadwal Dokter");
+                    mainBody.displayForm(new PendaftaranPasien(),"Pendaftaran Pasien");
                 }else if(index==2){
-                    mainBody.displayForm(new Jadwal_Pelayanan_admin(),"Jadwal Pelayanan");
-                }else if (index==3){
-                    mainBody.displayForm(new Data_Pasien(),"Data Pasien");
+                    mainBody.displayForm(new JadwalPelayanan(),"Jadwal Pelayanan");
+                }else if(index==3){
+                    mainBody.displayForm(new RekamMedis(),"Rekam Medis");
                 }else if (index==4){
-                    mainBody.displayForm(new Rekam_medis(),"Rekam Medis");
+                    mainBody.displayForm(new DataPasien(),"Data Pasien");
                 }else if (index==5){
+                    mainBody.displayForm(new DataKaryawan(),"Data Karyawan");
+                }else if (index==6){
+                    mainBody.displayForm(new Laporan(), "Laporan");
+                }else if (index==7){
                      Login a = new Login();
                     a.setVisible(true);
 //                    UserSession.setUserLogin("");
@@ -71,7 +77,7 @@ public class Dashboard extends javax.swing.JFrame {
         panelBackground1Layout.setVerticalGroup(
             panelBackground1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(mainBody, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+            .addComponent(mainBody, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
