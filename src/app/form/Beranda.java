@@ -43,13 +43,15 @@ public class Beranda extends Form {
         jLabel6 = new javax.swing.JLabel();
         roundPanel4 = new app.swing.RoundPanel();
 
-        roundPanel1.setBackground(new java.awt.Color(153, 204, 255));
+        setBackground(new java.awt.Color(219, 232, 208));
+
+        roundPanel1.setBackground(new java.awt.Color(244, 194, 194));
 
         jLabel1.setText("Biru : Pasien Bidan");
 
         jLabel5.setText("Hijau : Dokter Umum");
 
-        jLabel3.setText("kurva");
+        jLabel3.setText("kurva : jumlah pasien bulanan");
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -76,7 +78,7 @@ public class Beranda extends Form {
                     .addComponent(jLabel5)))
         );
 
-        roundPanel3.setBackground(new java.awt.Color(153, 204, 255));
+        roundPanel3.setBackground(new java.awt.Color(161, 217, 188));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -114,7 +116,7 @@ public class Beranda extends Form {
                 .addContainerGap())
         );
 
-        roundPanel2.setBackground(new java.awt.Color(153, 204, 255));
+        roundPanel2.setBackground(new java.awt.Color(196, 229, 236));
 
         javax.swing.GroupLayout roundPanel2Layout = new javax.swing.GroupLayout(roundPanel2);
         roundPanel2.setLayout(roundPanel2Layout);
@@ -131,7 +133,7 @@ public class Beranda extends Form {
 
         jLabel6.setText("Card Box : Total Pasien Harian Bidan");
 
-        roundPanel4.setBackground(new java.awt.Color(153, 204, 255));
+        roundPanel4.setBackground(new java.awt.Color(255, 252, 199));
 
         javax.swing.GroupLayout roundPanel4Layout = new javax.swing.GroupLayout(roundPanel4);
         roundPanel4.setLayout(roundPanel4Layout);

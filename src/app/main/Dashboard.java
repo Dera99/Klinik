@@ -7,6 +7,7 @@ import app.form.JadwalPelayanan;
 import app.form.Laporan;
 import app.form.RekamMedis;
 import app.form.DataKaryawan;
+import app.form.DataObat;
 import app.form.PendaftaranPasien;
 import app.menu.EventMenu;
 
@@ -35,8 +36,10 @@ public class Dashboard extends javax.swing.JFrame {
                 }else if (index==5){
                     mainBody.displayForm(new DataKaryawan(),"Data Karyawan");
                 }else if (index==6){
-                    mainBody.displayForm(new Laporan(), "Laporan");
+                    mainBody.displayForm(new DataObat(),"Data Obat");
                 }else if (index==7){
+                    mainBody.displayForm(new Laporan(), "Laporan");
+                }else if (index==8){
                      Login a = new Login();
                     a.setVisible(true);
 //                    UserSession.setUserLogin("");
@@ -64,6 +67,8 @@ public class Dashboard extends javax.swing.JFrame {
         mainBody = new app.components.MainBody();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        panelBackground1.setForeground(new java.awt.Color(204, 255, 204));
 
         javax.swing.GroupLayout panelBackground1Layout = new javax.swing.GroupLayout(panelBackground1);
         panelBackground1.setLayout(panelBackground1Layout);
