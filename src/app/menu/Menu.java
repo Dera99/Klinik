@@ -1,6 +1,7 @@
 package app.menu;
 
 
+import app.services.UserSession;
 import app.swing.MenuButton;
 import app.themes.SystemTheme;
 import java.awt.Color;
@@ -55,6 +56,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void initMenu() {
+        String level = UserSession.getLevel();
         addMenu("Beranda", null, 0);
         addMenu("Pendaftaran Pasien", null, 1);
         addMenu("Jadwal Pelayanan", null, 2);

@@ -10,6 +10,7 @@ import app.form.DataKaryawan;
 import app.form.DataObat;
 import app.form.PendaftaranPasien;
 import app.menu.EventMenu;
+import app.services.UserSession;
 
 
 public class Dashboard extends javax.swing.JFrame {
@@ -18,6 +19,7 @@ public class Dashboard extends javax.swing.JFrame {
     public Dashboard() {
         initComponents();
         init();
+        System.out.println(UserSession.getLevel());
     }
     private void init(){
         menu.addEventMenu(new EventMenu() {
