@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 20/01/2023 21:49:35
+ Date: 28/01/2023 23:27:33
 */
 
 SET NAMES utf8mb4;
@@ -103,8 +103,8 @@ CREATE TABLE `jadwal_pelayanan`  (
   PRIMARY KEY (`id_jadwal`) USING BTREE,
   INDEX `jadwal_pelayanan_ibfk_2`(`id_bidan`) USING BTREE,
   INDEX `jadwal_pelayanan_ibfk_1`(`id_dokter`) USING BTREE,
-  CONSTRAINT `jadwal_pelayanan_ibfk_2` FOREIGN KEY (`id_bidan`) REFERENCES `bidan` (`id_bidan`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  CONSTRAINT `jadwal_pelayanan_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `jadwal_pelayanan_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `jadwal_pelayanan_ibfk_2` FOREIGN KEY (`id_bidan`) REFERENCES `bidan` (`id_bidan`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
@@ -120,14 +120,16 @@ CREATE TABLE `obat`  (
   `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `harga` float NULL DEFAULT NULL,
   `jumlah` int NULL DEFAULT NULL,
+  `dosis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `expired` date NULL DEFAULT NULL,
   PRIMARY KEY (`id_obat`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of obat
 -- ----------------------------
-INSERT INTO `obat` VALUES ('1', 'paracetamol', 5000, 12);
-INSERT INTO `obat` VALUES ('2', 'panadol', 300, 4);
+INSERT INTO `obat` VALUES ('1', 'paracetamol', 5000, 12, '500mg', '2023-01-26');
+INSERT INTO `obat` VALUES ('2', 'panadol', 300, 4, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for pasien
@@ -143,7 +145,7 @@ CREATE TABLE `pasien`  (
   `kode_asuransi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tanggal_daftar` date NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id_pasien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pasien
@@ -168,7 +170,6 @@ INSERT INTO `pasien` VALUES (17, '23123', 'ss', '312312', 'Laki-Laki', '2023-01-
 INSERT INTO `pasien` VALUES (18, '23123', 'ss', '312312', 'Laki-Laki', '2023-01-20', '2232', '2023-01-20');
 INSERT INTO `pasien` VALUES (19, '23123ccc', 'ss', '312312', 'Laki-Laki', '2023-01-20', '2232', '2023-01-20');
 INSERT INTO `pasien` VALUES (20, 'dera', 'aa', 'aa', 'Laki-Laki', '2023-01-20', 'aa', '2023-01-20');
-INSERT INTO `pasien` VALUES (21, 'dera', 'aa', 'aa', 'Laki-Laki', '2023-01-20', 'aa', '2023-01-20');
 
 -- ----------------------------
 -- Table structure for pemeriksaan
@@ -176,7 +177,7 @@ INSERT INTO `pasien` VALUES (21, 'dera', 'aa', 'aa', 'Laki-Laki', '2023-01-20', 
 DROP TABLE IF EXISTS `pemeriksaan`;
 CREATE TABLE `pemeriksaan`  (
   `id_pemeriksaan` int NOT NULL AUTO_INCREMENT,
-  `pelayanan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `pelayanan` enum('Umum','Bidan') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_pasien` int NULL DEFAULT NULL,
   `id_bidan` int NULL DEFAULT NULL,
   `id_dokter` int NULL DEFAULT NULL,
@@ -188,23 +189,12 @@ CREATE TABLE `pemeriksaan`  (
   INDEX `pemeriksaan_ibfk_3`(`id_pasien`) USING BTREE,
   CONSTRAINT `pemeriksaan_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `pemeriksaan_ibfk_2` FOREIGN KEY (`id_bidan`) REFERENCES `bidan` (`id_bidan`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `pemeriksaan_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `pemeriksaan_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE SET NULL ON UPDATE CASCADE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pemeriksaan
 -- ----------------------------
-INSERT INTO `pemeriksaan` VALUES (1, NULL, 1, NULL, 1, '2023-01-19', 'sakit Kepala');
-INSERT INTO `pemeriksaan` VALUES (2, NULL, 10, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (3, 'Dokter', 13, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (4, 'Bidan', 14, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (5, 'Bidan', 15, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (6, 'Dokter', 16, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (7, 'Dokter', 17, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (8, 'Dokter', 18, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (9, 'Bidan', 19, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (10, 'Dokter', 20, NULL, NULL, NULL, NULL);
-INSERT INTO `pemeriksaan` VALUES (11, 'Dokter', 21, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for resep
@@ -215,13 +205,13 @@ CREATE TABLE `resep`  (
   `id_pemeriksaan` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_resep`) USING BTREE,
   INDEX `id_pemeriksaan_ibkf1`(`id_pemeriksaan`) USING BTREE,
-  CONSTRAINT `id_pemeriksaan_ibkf1` FOREIGN KEY (`id_pemeriksaan`) REFERENCES `pemeriksaan` (`id_pemeriksaan`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  CONSTRAINT `id_pemeriksaan_ibkf1` FOREIGN KEY (`id_pemeriksaan`) REFERENCES `pemeriksaan` (`id_pemeriksaan`) ON DELETE SET NULL ON UPDATE RESTRICT
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of resep
 -- ----------------------------
-INSERT INTO `resep` VALUES (1, 1);
+INSERT INTO `resep` VALUES (1, NULL);
 
 -- ----------------------------
 -- Table structure for transaksi

@@ -32,7 +32,7 @@ public class Dashboard extends javax.swing.JFrame {
                 }else if(index==2){
                     mainBody.displayForm(new JadwalPelayanan(),"Jadwal Pelayanan");
                 }else if(index==3){
-                    mainBody.displayForm(new RekamMedis(),"Rekam Medis");
+                    mainBody.displayForm(new DataObat(),"Data Obat");
                 }else if (index==4){
                     mainBody.displayForm(new DataPasien(),"Data Pasien");
                 }else if (index==5){

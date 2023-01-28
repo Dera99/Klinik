@@ -33,7 +33,7 @@ public class PendaftaranPasien extends Form {
     String gender;
     String kode;
     int idPasien,idPeriksa;
-    String pelayanan = "Dokter";
+    String pelayanan = "Umum";
     private void cariPasien(String kode) throws SQLException{
         sql="SELECT * FROM pasien WHERE kode_asuransi = '"+kode+"'";
         pst = CC.prepareStatement(sql);
@@ -61,28 +61,41 @@ public class PendaftaranPasien extends Form {
         telp = txtTelp.getText();
         gender = (String) cbGender.getSelectedItem();
         if(radioPribadi.isSelected()){
-            kode="";
+        kode="";
         }else{
-            kode=txtKode.getText();
+        kode=txtKode.getText();
         }
-        sql="INSERT INTO pasien (nama,alamat,no_telp,jenis_kelamin,ttl,kode_asuransi)VALUES(?,?,?,?,?,?) ON DUPLICATE KEY UPDATE id_pasien = LAST_INSERT_ID(id_pasien)";
-        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        pst.setString(1, nama);
-        pst.setString(2, alamat);
-        pst.setString(3, telp);
-        pst.setString(4, gender);
-        pst.setDate(5, sqlDate);
-        pst.setString(6, kode);
-        pst.execute();
-        rs = pst.getGeneratedKeys();
-        rs.first();
-        idPasien = rs.getInt(1);
+            sql = "SELECT id_pasien FROM pasien WHERE nama=? AND alamat=? AND no_telp=? AND jenis_kelamin=? AND ttl=? AND kode_asuransi=?";
+            pst = CC.prepareStatement(sql);
+            pst.setString(1, nama);
+            pst.setString(2, alamat);
+            pst.setString(3, telp);
+            pst.setString(4, gender);
+            pst.setDate(5, sqlDate);
+            pst.setString(6, kode);
+            rs = pst.executeQuery();
+            if(rs.next()) {
+            idPasien = rs.getInt("id_pasien");
+        } else {
+            sql = "INSERT INTO pasien (nama,alamat,no_telp,jenis_kelamin,ttl,kode_asuransi)VALUES(?,?,?,?,?,?)";
+            pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pst.setString(1, nama);
+            pst.setString(2, alamat);
+            pst.setString(3, telp);
+            pst.setString(4, gender);
+            pst.setDate(5, sqlDate);
+            pst.setString(6, kode);
+            pst.execute();
+            rs = pst.getGeneratedKeys();
+            rs.first();
+            idPasien = rs.getInt(1);
+        }
         rs.close();
         pst.close();
-    }   
+    }
     private void daftarPemeriksaan() throws SQLException{
         if(radioDokter.isSelected()){
-           pelayanan="Dokter";
+           pelayanan="Umum";
         }else{
            pelayanan="Bidan";
         }
@@ -160,7 +173,7 @@ public class PendaftaranPasien extends Form {
             }
         });
 
-        radioDokter.setText("Dokter");
+        radioDokter.setText("Umum");
         radioDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radioDokterActionPerformed(evt);
@@ -326,7 +339,6 @@ public class PendaftaranPasien extends Form {
             // TODO add your handling code here:
             daftarPasien();
             daftarPemeriksaan();
-            System.out.println("ID Pasien : "+idPasien);
         } catch (SQLException ex) {
             Logger.getLogger(PendaftaranPasien.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
