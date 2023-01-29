@@ -60,11 +60,12 @@ public class Menu extends javax.swing.JPanel {
         //if(level.equals("Admin")){
         addMenu("Beranda", null, 0);
         addMenu("Pendaftaran Pasien", null, 1);
-        addMenu("Jadwal Pelayanan", null, 2);
+        addMenu("Pemeriksaan", null, 2);
+//        addMenu("Jadwal Pelayanan", null, 2);
         addMenu("Data Obat", null, 3);
-        addMenu("Data Pasien", null,4);
-        addMenu("Data Karyawan", null,5);
-        addMenu("Laporan", null,6);
+//        addMenu("Data Pasien", null,4);
+//        addMenu("Data Karyawan", null,5);
+//        addMenu("Laporan", null,6);
         addMenu("Logout",null,7);
 //        }else if(level.equals("Umum")){
 //    

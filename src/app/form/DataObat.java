@@ -4,12 +4,20 @@ package app.form;
 import app.components.Form;
 import app.configurations.koneksi;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 public class DataObat extends Form{
 
@@ -48,11 +56,69 @@ public class DataObat extends Form{
              table.setModel(model);
             }
         }catch(SQLException e){
-            System.err.println(e);
+            e.printStackTrace();
         } 
     }
-    private void updateObat(){
-       
+    private void addObat() throws ParseException{
+       kode = txtKode.getText();
+       nama = txtNama.getText();
+       harga = Integer.parseInt(txtHarga.getText());
+       stok = (int) txtStok.getValue();
+       dosis = txtDosis.getText();
+       DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+       expired =  format.parse(txtExpired.getText());
+       java.sql.Date sqlDate = new java.sql.Date(expired.getTime());
+       try{
+           sql="Insert Into obat (id_obat,nama,harga,jumlah,dosis,expired) VALUES (?,?,?,?,?,?)";
+           pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+           pst.setString(1,kode);
+           pst.setString(2, nama);
+           pst.setInt(3, harga);
+           pst.setInt(4, stok);
+           pst.setString(5, dosis);
+           pst.setDate(6, sqlDate);
+           pst.execute();
+           rs = pst.getGeneratedKeys();
+           kode = rs.getString(1);
+           rs.close();
+           pst.close();
+       }catch(SQLException e){
+           e.printStackTrace();
+       }
+    }
+    private void updateObat() throws ParseException{
+       nama = txtNama.getText();
+       harga = Integer.parseInt(txtHarga.getText());
+       stok = (int) txtStok.getValue();
+       dosis = txtDosis.getText();
+       DateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+       expired =  format.parse(txtExpired.getText());
+       java.sql.Date sqlDate = new java.sql.Date(expired.getTime());
+       try{
+           sql="UPDATE obat SET nama=?,harga=?,jumlah=?,dosis=?,expired=? WHERE id_obat='"+kode+"'";
+           pst = CC.prepareStatement(sql);
+           pst.setString(1, nama);
+           pst.setInt(2, harga);
+           pst.setInt(3, stok);
+           pst.setString(4, dosis);
+           pst.setDate(5, sqlDate);
+           pst.execute();
+           rs.close();
+           pst.close();
+       }catch(SQLException e){
+           e.printStackTrace();
+       }
+    }
+    private void deleteObat(){
+         try{
+           sql="Delete FROM obat WHERE id_obat='"+kode+"'";
+           pst = CC.prepareStatement(sql);
+           pst.execute();
+           rs.close();
+           pst.close();
+         }catch(SQLException e){
+             e.printStackTrace();
+         }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -61,7 +127,7 @@ public class DataObat extends Form{
         dateChooser1 = new com.raven.datechooser.DateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txtSearch = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -83,8 +149,10 @@ public class DataObat extends Form{
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         dateChooser1.setDateFormat("yyyy-MM-dd");
+        dateChooser1.setTextRefernce(txtExpired);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -104,6 +172,12 @@ public class DataObat extends Form{
         });
         jScrollPane1.setViewportView(table);
 
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSearchKeyReleased(evt);
+            }
+        });
+
         jLabel1.setText("Cari");
 
         jLabel2.setText("Kode Obat");
@@ -114,9 +188,19 @@ public class DataObat extends Form{
 
         jLabel6.setText("Expired");
 
-        jButton1.setText("Simpan");
+        jButton1.setText("Tambah");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Hapus");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel8.setText(":");
 
@@ -134,25 +218,19 @@ public class DataObat extends Form{
 
         jLabel13.setText(":");
 
+        jButton3.setText("Update");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(50, 50, 50)
-                        .addComponent(jButton1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(0, 48, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -187,26 +265,42 @@ public class DataObat extends Form{
                                         .addGap(32, 32, 32)
                                         .addComponent(jLabel12)))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtStok, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtExpired, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtExpired, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(txtStok)
+                                        .addGap(10, 10, 10))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(24, 24, 24)
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(31, 31, 31))
+                                .addComponent(txtHarga, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton2)
+                                .addGap(170, 170, 170))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 835, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -242,7 +336,8 @@ public class DataObat extends Form{
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(jButton1)
+                    .addComponent(jButton3))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -264,11 +359,45 @@ public class DataObat extends Form{
         txtExpired.setText(expired.toString());
     }//GEN-LAST:event_tableMouseReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            addObat();
+            initTable();
+        } catch (ParseException ex) {
+            Logger.getLogger(DataObat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyReleased
+        // TODO add your handling code here:
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(table.getModel());
+        String value = txtSearch.getText();
+        sorter.setRowFilter(RowFilter.regexFilter(value));
+        table.setRowSorter(sorter);
+    }//GEN-LAST:event_txtSearchKeyReleased
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        try {
+            updateObat();
+            initTable();
+        } catch (ParseException ex) {
+            Logger.getLogger(DataObat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        deleteObat();
+        initTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.datechooser.DateChooser dateChooser1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -283,13 +412,13 @@ public class DataObat extends Form{
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable table;
     private javax.swing.JTextField txtDosis;
     private javax.swing.JTextField txtExpired;
     private javax.swing.JTextField txtHarga;
     private javax.swing.JTextField txtKode;
     private javax.swing.JTextField txtNama;
+    private javax.swing.JTextField txtSearch;
     private javax.swing.JSpinner txtStok;
     // End of variables declaration//GEN-END:variables
 }

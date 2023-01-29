@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 28/01/2023 23:27:33
+ Date: 29/01/2023 23:02:37
 */
 
 SET NAMES utf8mb4;
@@ -128,8 +128,7 @@ CREATE TABLE `obat`  (
 -- ----------------------------
 -- Records of obat
 -- ----------------------------
-INSERT INTO `obat` VALUES ('1', 'paracetamol', 5000, 12, '500mg', '2023-01-26');
-INSERT INTO `obat` VALUES ('2', 'panadol', 300, 4, NULL, NULL);
+INSERT INTO `obat` VALUES ('AMX-005', 'Amoxcyilin', 50, 3, '100mg', '2023-01-12');
 
 -- ----------------------------
 -- Table structure for pasien
@@ -181,7 +180,7 @@ CREATE TABLE `pemeriksaan`  (
   `id_pasien` int NULL DEFAULT NULL,
   `id_bidan` int NULL DEFAULT NULL,
   `id_dokter` int NULL DEFAULT NULL,
-  `tanggal` date NULL DEFAULT NULL,
+  `tanggal` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
   `diagnosa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_pemeriksaan`) USING BTREE,
   INDEX `pemeriksaan_ibfk_1`(`id_dokter`) USING BTREE,
@@ -195,6 +194,7 @@ CREATE TABLE `pemeriksaan`  (
 -- ----------------------------
 -- Records of pemeriksaan
 -- ----------------------------
+INSERT INTO `pemeriksaan` VALUES (1, 'Umum', 6, NULL, 1, '2023-01-24 00:00:00', 'Kanker');
 
 -- ----------------------------
 -- Table structure for resep
