@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 29/01/2023 23:02:37
+ Date: 01/02/2023 00:23:14
 */
 
 SET NAMES utf8mb4;
@@ -144,7 +144,7 @@ CREATE TABLE `pasien`  (
   `kode_asuransi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tanggal_daftar` date NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id_pasien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pasien
@@ -169,6 +169,8 @@ INSERT INTO `pasien` VALUES (17, '23123', 'ss', '312312', 'Laki-Laki', '2023-01-
 INSERT INTO `pasien` VALUES (18, '23123', 'ss', '312312', 'Laki-Laki', '2023-01-20', '2232', '2023-01-20');
 INSERT INTO `pasien` VALUES (19, '23123ccc', 'ss', '312312', 'Laki-Laki', '2023-01-20', '2232', '2023-01-20');
 INSERT INTO `pasien` VALUES (20, 'dera', 'aa', 'aa', 'Laki-Laki', '2023-01-20', 'aa', '2023-01-20');
+INSERT INTO `pasien` VALUES (23, 'Asuteru', 'Jl H Aip', '0877677', 'Laki-Laki', '2023-01-31', '', '2023-01-31');
+INSERT INTO `pasien` VALUES (24, 'ASutenan', 'ddd', 'ff', 'Laki-Laki', '2023-02-01', 'aa', '2023-02-01');
 
 -- ----------------------------
 -- Table structure for pemeriksaan
@@ -180,7 +182,7 @@ CREATE TABLE `pemeriksaan`  (
   `id_pasien` int NULL DEFAULT NULL,
   `id_bidan` int NULL DEFAULT NULL,
   `id_dokter` int NULL DEFAULT NULL,
-  `tanggal` datetime NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `tanggal` datetime NULL DEFAULT current_timestamp ON UPDATE CURRENT_TIMESTAMP,
   `diagnosa` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_pemeriksaan`) USING BTREE,
   INDEX `pemeriksaan_ibfk_1`(`id_dokter`) USING BTREE,
@@ -189,12 +191,14 @@ CREATE TABLE `pemeriksaan`  (
   CONSTRAINT `pemeriksaan_ibfk_1` FOREIGN KEY (`id_dokter`) REFERENCES `dokter` (`id_dokter`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `pemeriksaan_ibfk_2` FOREIGN KEY (`id_bidan`) REFERENCES `bidan` (`id_bidan`) ON DELETE RESTRICT ON UPDATE CASCADE,
   CONSTRAINT `pemeriksaan_ibfk_3` FOREIGN KEY (`id_pasien`) REFERENCES `pasien` (`id_pasien`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pemeriksaan
 -- ----------------------------
-INSERT INTO `pemeriksaan` VALUES (1, 'Umum', 6, NULL, 1, '2023-01-24 00:00:00', 'Kanker');
+INSERT INTO `pemeriksaan` VALUES (1, 'Umum', 6, NULL, 1, '2023-02-01 00:00:00', 'Kanker');
+INSERT INTO `pemeriksaan` VALUES (16, 'Umum', 23, NULL, NULL, '2023-02-01 23:37:14', NULL);
+INSERT INTO `pemeriksaan` VALUES (17, 'Umum', 24, NULL, NULL, '2023-02-01 00:16:39', NULL);
 
 -- ----------------------------
 -- Table structure for resep
