@@ -18,7 +18,7 @@ public class Auth {
     String sql;
      public void Auth(String Username, String Password, JFrame frame){
         try{
-            sql="SELECT * FROM accounts WHERE username = '"+Username+
+            sql="SELECT * FROM accounts JOIN tenaga_medis ON tenaga_medis.id_user = accounts.id_user WHERE username = '"+Username+
             "' and password = '"+Password+"'";
             pst = CC.prepareStatement(sql);
             rs = pst.executeQuery();
@@ -27,10 +27,16 @@ public class Auth {
                 String user = rs.getString("username");
                 String pass = rs.getString("password");
                 String level = rs.getString("level");
+                String idMedis = rs.getString("id_medis");
+                String nama = rs.getString("nama");
+                String profesi = rs.getString("profesi");
          if (Password.equals(pass) && Username.equals(user)){
                     JOptionPane.showMessageDialog(frame, "Login Berhasil");
                     UserSession.setLevel(level);
-                    UserSession.setUserLogin(user);                    
+                    UserSession.setUserLogin(user); 
+                    UserSession.setIdMedis(idMedis);
+                    UserSession.setNamaMedis(nama);
+                    UserSession.setProfesi(profesi);
                         Dashboard a = new Dashboard();
                         a.setVisible(true); 
                         frame.dispose();
