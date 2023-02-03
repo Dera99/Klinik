@@ -22,7 +22,7 @@ public class Pemeriksaan extends Form {
         idMedis =UserSession.getIdMedis();
         txtMedis.setText(UserSession.getIdMedis());
         txtMedis.setEditable(false);
-        initTablePemeriksaan();
+        initDaftarPeriksa();
     }
     int idPasien,idPeriksa;
     String diagnosa,pelayanan,nama,gender,idMedis,medis,profesi;
@@ -67,7 +67,7 @@ public class Pemeriksaan extends Form {
             e.printStackTrace();
         }    
     }
-    private void initTablePemeriksaan(){
+    private void initDaftarPeriksa(){
        DefaultTableModel model = new DefaultTableModel();
        model.addColumn("ID Periksa");
        model.addColumn("ID Pasien");
@@ -78,9 +78,9 @@ public class Pemeriksaan extends Form {
        try{
             stt=CC.createStatement();
             if(profesi.equals("Dokter Umum")){
-                rs = stt.executeQuery("SELECT * From pemeriksaan JOIN pasien ON pasien.id_pasien = pemeriksaan.id_pasien where diagnosa is null AND pemeriksaan.pelayanan='Umum' AND DATE(tanggal) = CURDATE() ");
+                rs = stt.executeQuery("SELECT * From pemeriksaan JOIN pasien ON pasien.id_pasien = pemeriksaan.id_pasien where pemeriksaan.pelayanan='Umum' AND DATE(tanggal) = CURDATE() ");
             }else{
-               rs = stt.executeQuery("SELECT * From pemeriksaan JOIN pasien ON pasien.id_pasien = pemeriksaan.id_pasien where diagnosa is null AND pemeriksaan.pelayanan='Bidan' AND DATE(tanggal) = CURDATE() "); 
+               rs = stt.executeQuery("SELECT * From pemeriksaan JOIN pasien ON pasien.id_pasien = pemeriksaan.id_pasien where pemeriksaan.pelayanan='Bidan' AND DATE(tanggal) = CURDATE() "); 
             }
             while(rs.next()){
               idPeriksa = rs.getInt("id_pemeriksaan");
@@ -111,9 +111,6 @@ public class Pemeriksaan extends Form {
         }catch(SQLException e){
             System.err.println(e);
         }
-        
-        
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -282,6 +279,11 @@ public class Pemeriksaan extends Form {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        idPeriksa = Integer.parseInt(txtPeriksa.getText());
+        idPasien=Integer.parseInt(txtPasien.getText());
+        updateDiagnosa(idPeriksa);
+        initDaftarPeriksa();
+        rekamMedis(idPasien);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void table1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table1MouseReleased
@@ -314,7 +316,8 @@ public class Pemeriksaan extends Form {
     private void btnResepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResepActionPerformed
         // TODO add your handling code here:
         idPeriksa = Integer.parseInt(txtPeriksa.getText());
-        Resep resep = new Resep(idPeriksa);
+        idPasien = Integer.parseInt(txtPasien.getText());
+        Resep resep = new Resep(idPeriksa,idPasien);
         resep.setVisible(true);
     }//GEN-LAST:event_btnResepActionPerformed
 
