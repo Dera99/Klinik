@@ -6,12 +6,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
 
 public class Resep extends javax.swing.JFrame {
 
-    int idPeriksa, idPasien;
+    static int idPeriksa, idPasien,resep;
     ResultSet rs = null;
     Connection CC = new koneksi().connect();;
     PreparedStatement pst = null;
@@ -22,38 +25,95 @@ public class Resep extends javax.swing.JFrame {
         this.idPeriksa=idPeriksa;
         this.idPasien = idPasien;
         System.out.println("id Periksa : "+idPeriksa);
-        txtResep.setEditable(false);
-        txtPeriksa.setEditable(false);
-        txtPasien.setEditable(false);
+        txtResep.setEnabled(false);
+        txtPeriksa.setEnabled(false);
+        txtPasien.setEnabled(false);
+        getObat(cbObat);
+        initTable();
         txtPeriksa.setText(String.valueOf(idPeriksa));
         txtPasien.setText(String.valueOf(idPasien));
-        txtResep.setText(String.valueOf(getResep(idPeriksa)));
+        txtResep.setText(String.valueOf(getResep()));
     }
-    int resep,jumlah;
+    int jumlah;
     String nama,aturan,kode;
     private Resep(){}
     
-    private int getResep(int id){
-    DefaultTableModel model = new DefaultTableModel();
-    int kode = 0;
+    private void initTable(){
+       DefaultTableModel model = new DefaultTableModel();
+       model.addColumn("No");
+       model.addColumn("Kode Obat");
+       model.addColumn("Nama Obat");
+       model.addColumn("Aturan Pakai");
+       model.addColumn("Jumlah");
     try{
-//        model.addColumn("No Resep");
-//        model.addColumn("Kode Obat");
-//        model.addColumn("Nama Obat");
-//        model.addColumn("Aturan");
-//        model.addColumn("Jumlah");
-        rs = stt.executeQuery("SELECT * FROM resep WHERE resep.id_pemeriksaan="+id+"");
-        if(rs.next()){
-            kode = rs.getInt("id_resep");
-            
-            //model.addRow(new Object[]{resep,kode,nama,aturan,jumlah});
+        stt=CC.createStatement();
+        rs = stt.executeQuery("SELECT * FROM resep JOIN detail_resep ON detail_resep.id_resep = resep.id_resep JOIN obat ON obat.id_obat = detail_resep.id_obat WHERE resep.id_pemeriksaan="+idPeriksa+"");
+        int no = 0;
+        while(rs.next()){
+            no++;
+            resep = rs.getInt("id_resep");
+            kode = rs.getString("id_obat");
+            nama = rs.getString("obat.nama");
+            aturan = rs.getString("detail_resep.aturan");
+            jumlah = rs.getInt("detail_resep.jumlah");
+            model.addRow(new Object[]{no,kode,nama,aturan,jumlah});
+            table.setModel(model);
         }
     }catch(SQLException e){
         e.printStackTrace();
     }
+}
+    private int getResep(){
+        idPeriksa = Integer.parseInt(txtPeriksa.getText());
+        try{
+            stt=CC.createStatement();
+            rs = stt.executeQuery("SELECT * FROM resep WHERE resep.id_pemeriksaan = "+idPeriksa+"");
+            if(rs.next()){
+                resep=rs.getInt("id_resep");
+            }
+        }catch(SQLException e){
+        
+        }
+        return resep;
+    }
+    
+    private void getObat(JComboBox paket){
+         try{
+            stt=CC.createStatement();
+            rs = stt.executeQuery("SELECT * FROM obat WHERE jumlah != 0 OR jumlah IS NOT NULL;");
+            while(rs.next()){
+                paket.addItem(rs.getString("nama"));  
+            }
+        }catch(SQLException e){
+            System.err.println(e);
+        } 
+    }
+    private String getIdObat(String obat){
+        try{
+            stt=CC.createStatement();
+            rs = stt.executeQuery("SELECT * FROM detail_resep JOIN obat ON obat.id_obat = detail_resep.id_obat WHERE nama='"+obat+"'");
+            if(rs.next()){
+                kode = rs.getString("id_obat");  
+            }
+        }catch(SQLException e){
+            System.err.println(e);
+        } 
         return kode;
     }
  
+//    private void tambahObat(){
+//      try{
+//        sql= "Update detail_obat Set id_obat=?, aturan=?, jumlah=? WHERE id_pemeriksaan="+idperiksa+" limit 1";
+//        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//        pst.setString(1, idMedis);
+//        pst.setString(2, txtDiagnosa.getText());
+//        pst.execute();
+//        rs.close();
+//        pst.close();   
+//        }catch(SQLException e){
+//            System.err.println(e);
+//        }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -64,7 +124,7 @@ public class Resep extends javax.swing.JFrame {
         txtResep = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbObat = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtResep1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -91,7 +151,7 @@ public class Resep extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "No Resep", "Kode Obat", "Nama Obat", "Aturan", "Jumlah"
+                "No", "Kode Obat", "Nama Obat", "Aturan", "Jumlah"
             }
         ));
         jScrollPane1.setViewportView(table);
@@ -100,11 +160,11 @@ public class Resep extends javax.swing.JFrame {
 
         jLabel2.setText("Nama Obat");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel3.setText("Aturan Pakai");
 
         jLabel4.setText("Jumlah");
+
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
         jButton1.setText("Tambah");
 
@@ -157,13 +217,13 @@ public class Resep extends javax.swing.JFrame {
                                             .addComponent(jLabel3)
                                             .addComponent(jLabel4))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtResep1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtResep1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                            .addComponent(jSpinner1)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(cbObat, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -192,7 +252,7 @@ public class Resep extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbObat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(txtResep1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -237,11 +297,11 @@ public class Resep extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbObat;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

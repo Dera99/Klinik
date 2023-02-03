@@ -112,6 +112,9 @@ public class Pemeriksaan extends Form {
             System.err.println(e);
         }
     }
+    private void getResep(int periksaID){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
