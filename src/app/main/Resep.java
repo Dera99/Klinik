@@ -29,6 +29,7 @@ public class Resep extends javax.swing.JFrame {
         txtPeriksa.setEnabled(false);
         txtPasien.setEnabled(false);
         getObat(cbObat);
+        kode = getIdObat(cbObat.getSelectedItem().toString());
         initTable();
         txtPeriksa.setText(String.valueOf(idPeriksa));
         txtPasien.setText(String.valueOf(idPasien));
@@ -100,20 +101,44 @@ public class Resep extends javax.swing.JFrame {
         } 
         return kode;
     }
- 
-//    private void tambahObat(){
-//      try{
-//        sql= "Update detail_obat Set id_obat=?, aturan=?, jumlah=? WHERE id_pemeriksaan="+idperiksa+" limit 1";
-//        pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-//        pst.setString(1, idMedis);
-//        pst.setString(2, txtDiagnosa.getText());
-//        pst.execute();
-//        rs.close();
-//        pst.close();   
-//        }catch(SQLException e){
-//            System.err.println(e);
-//        }
-//    }
+
+    private void tambahObat(){
+      resep = Integer.parseInt(txtResep.getText());
+      kode = getIdObat(cbObat.getSelectedItem().toString());
+        System.out.println("Kode "+kode);
+      aturan = txtAturan.getText();
+      jumlah = (int) spinJumlah.getValue();
+      try{
+        String sqlCheck = "SELECT id_obat, aturan, jumlah FROM detail_resep WHERE id_resep = ? limit 1";
+        PreparedStatement pstCheck = CC.prepareStatement(sqlCheck);
+        pstCheck.setInt(1, resep);
+        ResultSet rs = pstCheck.executeQuery();
+        if (rs.next()) {
+            Integer existingIdObat = rs.getInt("id_obat");
+            String existingAturan = rs.getString("aturan");
+            Integer existingJumlah = rs.getInt("jumlah");
+            if (existingIdObat == null || existingAturan == null || existingJumlah == null) {
+                String sqlUpdate = "UPDATE detail_resep SET id_obat = COALESCE(?, id_obat), aturan = COALESCE(?, aturan), jumlah = COALESCE(?, jumlah) WHERE id_resep = ? limit 1";
+                PreparedStatement pstUpdate = CC.prepareStatement(sqlUpdate);
+                pstUpdate.setInt(4, resep);
+                pstUpdate.setString(1, kode);
+                pstUpdate.setString(2, aturan);
+                pstUpdate.setInt(3, jumlah);
+                pstUpdate.executeUpdate();
+            }
+        } else {
+            String sqlInsert = "INSERT INTO detail_resep (id_resep, id_obat, aturan, jumlah) VALUES (?, ?, ?, ?)";
+            PreparedStatement pstInsert = CC.prepareStatement(sqlInsert);
+            pstInsert.setInt(1, resep);
+            pstInsert.setString(2, kode);
+            pstInsert.setString(3, aturan);
+            pstInsert.setInt(4, jumlah);
+            pstInsert.executeUpdate();
+        }
+        }catch(SQLException e){
+            System.err.println(e);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -126,9 +151,9 @@ public class Resep extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cbObat = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        txtResep1 = new javax.swing.JTextField();
+        txtAturan = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinJumlah = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -160,13 +185,24 @@ public class Resep extends javax.swing.JFrame {
 
         jLabel2.setText("Nama Obat");
 
+        cbObat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbObatActionPerformed(evt);
+            }
+        });
+
         jLabel3.setText("Aturan Pakai");
 
         jLabel4.setText("Jumlah");
 
-        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
+        spinJumlah.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
         jButton1.setText("Tambah");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cetak");
 
@@ -218,8 +254,8 @@ public class Resep extends javax.swing.JFrame {
                                             .addComponent(jLabel4))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtResep1, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-                                            .addComponent(jSpinner1)))
+                                            .addComponent(txtAturan, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                                            .addComponent(spinJumlah)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -255,12 +291,12 @@ public class Resep extends javax.swing.JFrame {
                                     .addComponent(cbObat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(txtResep1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtAturan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel4)
-                                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(spinJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
@@ -288,6 +324,17 @@ public class Resep extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObatActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cbObatActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        tambahObat();
+        initTable();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -310,11 +357,11 @@ public class Resep extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner spinJumlah;
     private javax.swing.JTable table;
+    private javax.swing.JTextField txtAturan;
     private javax.swing.JTextField txtPasien;
     private javax.swing.JTextField txtPeriksa;
     private javax.swing.JTextField txtResep;
-    private javax.swing.JTextField txtResep1;
     // End of variables declaration//GEN-END:variables
 }
