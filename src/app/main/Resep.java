@@ -10,11 +10,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 
 public class Resep extends javax.swing.JFrame {
 
-    static int idPeriksa, idPasien,resep;
+    int idPeriksa, idPasien,resep;
     ResultSet rs = null;
     Connection CC = new koneksi().connect();;
     PreparedStatement pst = null;
@@ -24,23 +25,23 @@ public class Resep extends javax.swing.JFrame {
         initComponents();
         this.idPeriksa=idPeriksa;
         this.idPasien = idPasien;
+        getObat(cbObat);
         System.out.println("id Periksa : "+idPeriksa);
         txtResep.setEnabled(false);
         txtPeriksa.setEnabled(false);
         txtPasien.setEnabled(false);
-        getObat(cbObat);
-        kode = getIdObat(cbObat.getSelectedItem().toString());
         initTable();
         txtPeriksa.setText(String.valueOf(idPeriksa));
         txtPasien.setText(String.valueOf(idPasien));
         txtResep.setText(String.valueOf(getResep()));
     }
-    int jumlah;
-    String nama,aturan,kode;
+    int jumlah,idDetail;
+    String nama,aturan,idObat;
     private Resep(){}
     
     private void initTable(){
        DefaultTableModel model = new DefaultTableModel();
+       model.addColumn("Detail ID");
        model.addColumn("No");
        model.addColumn("Kode Obat");
        model.addColumn("Nama Obat");
@@ -52,14 +53,19 @@ public class Resep extends javax.swing.JFrame {
         int no = 0;
         while(rs.next()){
             no++;
+            idDetail = rs.getInt("id_detail");
             resep = rs.getInt("id_resep");
-            kode = rs.getString("id_obat");
+            idObat = rs.getString("id_obat");
             nama = rs.getString("obat.nama");
             aturan = rs.getString("detail_resep.aturan");
             jumlah = rs.getInt("detail_resep.jumlah");
-            model.addRow(new Object[]{no,kode,nama,aturan,jumlah});
+            model.addRow(new Object[]{idDetail,no,idObat,nama,aturan,jumlah});
             table.setModel(model);
         }
+        TableColumn column = table.getColumnModel().getColumn(0);
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
     }catch(SQLException e){
         e.printStackTrace();
     }
@@ -81,7 +87,7 @@ public class Resep extends javax.swing.JFrame {
     private void getObat(JComboBox paket){
          try{
             stt=CC.createStatement();
-            rs = stt.executeQuery("SELECT * FROM obat WHERE jumlah != 0 OR jumlah IS NOT NULL;");
+            rs = stt.executeQuery("SELECT * FROM obat WHERE jumlah != 0 OR jumlah IS NOT NULL");
             while(rs.next()){
                 paket.addItem(rs.getString("nama"));  
             }
@@ -92,51 +98,81 @@ public class Resep extends javax.swing.JFrame {
     private String getIdObat(String obat){
         try{
             stt=CC.createStatement();
-            rs = stt.executeQuery("SELECT * FROM detail_resep JOIN obat ON obat.id_obat = detail_resep.id_obat WHERE nama='"+obat+"'");
+            rs = stt.executeQuery("SELECT * FROM obat WHERE obat.nama='"+obat+"'");
             if(rs.next()){
-                kode = rs.getString("id_obat");  
+                idObat = rs.getString("id_obat");  
             }
         }catch(SQLException e){
             System.err.println(e);
         } 
-        return kode;
+        return idObat;
     }
 
     private void tambahObat(){
       resep = Integer.parseInt(txtResep.getText());
-      kode = getIdObat(cbObat.getSelectedItem().toString());
-        System.out.println("Kode "+kode);
       aturan = txtAturan.getText();
       jumlah = (int) spinJumlah.getValue();
+      idObat = getIdObat(cbObat.getSelectedItem().toString());
       try{
-        String sqlCheck = "SELECT id_obat, aturan, jumlah FROM detail_resep WHERE id_resep = ? limit 1";
-        PreparedStatement pstCheck = CC.prepareStatement(sqlCheck);
-        pstCheck.setInt(1, resep);
-        ResultSet rs = pstCheck.executeQuery();
+        sql = "SELECT id_obat, aturan, jumlah FROM detail_resep WHERE id_resep = ?";
+        pst = CC.prepareStatement(sql);
+        pst.setInt(1, resep);
+        rs = pst.executeQuery();
         if (rs.next()) {
-            Integer existingIdObat = rs.getInt("id_obat");
+            String existingIdObat = rs.getString("id_obat");
             String existingAturan = rs.getString("aturan");
             Integer existingJumlah = rs.getInt("jumlah");
-            if (existingIdObat == null || existingAturan == null || existingJumlah == null) {
-                String sqlUpdate = "UPDATE detail_resep SET id_obat = COALESCE(?, id_obat), aturan = COALESCE(?, aturan), jumlah = COALESCE(?, jumlah) WHERE id_resep = ? limit 1";
+            if (existingIdObat == null|| existingAturan == null || existingJumlah == null) {
+                String sqlUpdate = "UPDATE detail_resep SET id_obat = COALESCE(?, id_obat), aturan = COALESCE(?, aturan), jumlah = COALESCE(?, jumlah) WHERE id_resep = ?";
                 PreparedStatement pstUpdate = CC.prepareStatement(sqlUpdate);
                 pstUpdate.setInt(4, resep);
-                pstUpdate.setString(1, kode);
+                pstUpdate.setString(1, idObat);
                 pstUpdate.setString(2, aturan);
                 pstUpdate.setInt(3, jumlah);
                 pstUpdate.executeUpdate();
-            }
-        } else {
+                pstUpdate.close();
+            } else {
             String sqlInsert = "INSERT INTO detail_resep (id_resep, id_obat, aturan, jumlah) VALUES (?, ?, ?, ?)";
             PreparedStatement pstInsert = CC.prepareStatement(sqlInsert);
             pstInsert.setInt(1, resep);
-            pstInsert.setString(2, kode);
+            pstInsert.setString(2, idObat);
             pstInsert.setString(3, aturan);
             pstInsert.setInt(4, jumlah);
             pstInsert.executeUpdate();
+            pstInsert.close();
+            }
         }
+        rs.close();
         }catch(SQLException e){
-            System.err.println(e);
+          e.printStackTrace();
+        }
+    }
+    private void updateObat(){
+       System.out.println("ID Detail "+idDetail);
+      aturan = txtAturan.getText();
+      jumlah = (int) spinJumlah.getValue();
+      idObat = getIdObat(cbObat.getSelectedItem().toString());
+        try {
+            sql="UPDATE detail_resep SET id_obat = ?,aturan = ?,jumlah=? WHERE id_detail= ?";
+            pst = CC.prepareStatement(sql);
+            pst.setString(1, idObat);
+            pst.setString(2, aturan);
+            pst.setInt(3, jumlah);
+            pst.setInt(4, idDetail);
+            pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(Resep.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private void deleteObat(){
+        System.out.println("ID Detail "+idDetail);
+        try {
+            sql = "DELETE FROM detail_resep WHERE id_detail = "+idDetail+"";
+            pst = CC.prepareStatement(sql);
+            pst.execute();
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Resep.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @SuppressWarnings("unchecked")
@@ -149,7 +185,6 @@ public class Resep extends javax.swing.JFrame {
         txtResep = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        cbObat = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtAturan = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -162,6 +197,7 @@ public class Resep extends javax.swing.JFrame {
         txtPeriksa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtPasien = new javax.swing.JTextField();
+        cbObat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -176,20 +212,24 @@ public class Resep extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "No", "Kode Obat", "Nama Obat", "Aturan", "Jumlah"
+                "Detail ID", "Kode Obat", "Nama Obat", "Aturan", "Jumlah"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tableMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setMinWidth(0);
+            table.getColumnModel().getColumn(0).setPreferredWidth(0);
+            table.getColumnModel().getColumn(0).setMaxWidth(0);
+        }
 
         jLabel1.setText("No Resep");
 
         jLabel2.setText("Nama Obat");
-
-        cbObat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbObatActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Aturan Pakai");
 
@@ -207,8 +247,18 @@ public class Resep extends javax.swing.JFrame {
         jButton2.setText("Cetak");
 
         jButton3.setText("Ubah");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Hapus");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("ID Periksa");
 
@@ -247,7 +297,7 @@ public class Resep extends javax.swing.JFrame {
                                 .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel3)
@@ -259,8 +309,8 @@ public class Resep extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbObat, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                        .addComponent(cbObat, 0, 123, Short.MAX_VALUE)))
+                                .addGap(0, 145, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -324,16 +374,36 @@ public class Resep extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObatActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_cbObatActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         tambahObat();
         initTable();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        updateObat();
+        initTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
+        int row = table.getSelectedRow();
+        idDetail= (Integer)(table.getModel().getValueAt(row,0));
+        idObat = (String) (table.getModel().getValueAt(row,2));
+        resep = Integer.parseInt(txtResep.getText());
+        aturan = (String)(table.getModel().getValueAt(row,4));
+        jumlah = (Integer) (table.getModel().getValueAt(row,5));
+        nama = (String)(table.getModel().getValueAt(row,3));
+        cbObat.setSelectedItem(nama);
+        txtAturan.setText(aturan);
+        spinJumlah.setValue(jumlah);
+    }//GEN-LAST:event_tableMouseReleased
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        deleteObat();
+        initTable();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {

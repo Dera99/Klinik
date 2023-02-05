@@ -6,7 +6,7 @@ import app.form.DataPasien;
 import app.form.JadwalPelayanan;
 import app.form.Laporan;
 import app.form.RekamMedis;
-import app.form.DataKaryawan;
+import app.form.TenagaMedis;
 import app.form.DataObat;
 import app.form.Pemeriksaan;
 import app.form.PendaftaranPasien;
@@ -37,7 +37,7 @@ public class Dashboard extends javax.swing.JFrame {
                 }else if (index==4){
                     mainBody.displayForm(new DataPasien(),"Data Pasien");
                 }else if (index==5){
-                    mainBody.displayForm(new DataKaryawan(),"Data Karyawan");
+                    mainBody.displayForm(new TenagaMedis(),"Daftar Tenaga Medis");
                 }else if (index==6){
                     mainBody.displayForm(new DataObat(),"Data Obat");
                 }else if (index==7){
