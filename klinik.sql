@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 03/02/2023 17:12:41
+ Date: 06/02/2023 01:19:18
 */
 
 SET NAMES utf8mb4;
@@ -22,18 +22,26 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `accounts`;
 CREATE TABLE `accounts`  (
-  `id_user` int NOT NULL,
+  `id_user` int NOT NULL AUTO_INCREMENT,
   `username` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `level` enum('Admin','Dokter','Bidan') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id_user`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id_user`) USING BTREE,
+  UNIQUE INDEX `username`(`username`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
 INSERT INTO `accounts` VALUES (1, 'admin', 'admin', 'Dokter');
 INSERT INTO `accounts` VALUES (2, 'bidan', 'bidan', 'Bidan');
+INSERT INTO `accounts` VALUES (6, 'daisy', 'daisy', 'Dokter');
+INSERT INTO `accounts` VALUES (8, '2312', '2312', 'Dokter');
+INSERT INTO `accounts` VALUES (9, 'xxx', 'xxx', 'Dokter');
+INSERT INTO `accounts` VALUES (10, '223123', '223123', 'Bidan');
+INSERT INTO `accounts` VALUES (12, 'xx31', 'xx31', 'Bidan');
+INSERT INTO `accounts` VALUES (13, '22221', '22221', 'Bidan');
+INSERT INTO `accounts` VALUES (15, 'Dialoge', 'Dialoge', 'Dokter');
 
 -- ----------------------------
 -- Table structure for detail_resep
@@ -42,21 +50,22 @@ DROP TABLE IF EXISTS `detail_resep`;
 CREATE TABLE `detail_resep`  (
   `id_detail` int NOT NULL AUTO_INCREMENT,
   `id_resep` int NULL DEFAULT NULL,
-  `id_obat` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_obat` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '',
   `aturan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `jumlah` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_detail`) USING BTREE,
-  INDEX `detail_resep_ibfk_2`(`id_obat`) USING BTREE,
-  INDEX `detail_resep_ibfk_1`(`id_resep`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  INDEX `detail_resep_ibfk_2`(`id_obat`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of detail_resep
 -- ----------------------------
-INSERT INTO `detail_resep` VALUES (1, 1, '1', '3x1', 2);
-INSERT INTO `detail_resep` VALUES (2, 1, '2', '3x2', 2);
-INSERT INTO `detail_resep` VALUES (3, 1, NULL, NULL, NULL);
-INSERT INTO `detail_resep` VALUES (4, 6, NULL, NULL, NULL);
+INSERT INTO `detail_resep` VALUES (7, 7, 'AMX-004', '2x1', 1);
+INSERT INTO `detail_resep` VALUES (8, 8, 'AMX-004', '2x3', 1);
+INSERT INTO `detail_resep` VALUES (10, 9, 'AMX-004', '2x3', 1);
+INSERT INTO `detail_resep` VALUES (11, 9, 'PST-0021', '2x3', 1);
+INSERT INTO `detail_resep` VALUES (12, 9, 'PST-0021', '23x2', 1);
+INSERT INTO `detail_resep` VALUES (13, 9, 'PST-0021', '3x3', 6);
 
 -- ----------------------------
 -- Table structure for jadwal_pelayanan
@@ -92,7 +101,9 @@ CREATE TABLE `obat`  (
 -- ----------------------------
 -- Records of obat
 -- ----------------------------
-INSERT INTO `obat` VALUES ('AMX-005', 'Amoxcyilin', 50, 5, '100mg', '2023-01-12');
+INSERT INTO `obat` VALUES ('AMX-004', 'AmoxCyilin', 50000, 44, '100mg', '2023-02-22');
+INSERT INTO `obat` VALUES ('AMX-005', 'Amoxcyilin', 50, 4, '100mg', '2023-01-12');
+INSERT INTO `obat` VALUES ('PST-0021', 'Antasida', 50, 74, '100mg', '2023-02-28');
 
 -- ----------------------------
 -- Table structure for pasien
@@ -108,7 +119,7 @@ CREATE TABLE `pasien`  (
   `kode_asuransi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `tanggal_daftar` date NULL DEFAULT current_timestamp,
   PRIMARY KEY (`id_pasien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 32 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pasien
@@ -142,6 +153,9 @@ INSERT INTO `pasien` VALUES (28, 'dera', '223', '1123', 'Laki-Laki', '2023-02-03
 INSERT INTO `pasien` VALUES (29, 'ass33', '2331234', '55213', 'Laki-Laki', '2023-02-03', '13223', '2023-02-03');
 INSERT INTO `pasien` VALUES (30, 'taikucing', '22312', '442', 'Laki-Laki', '2023-02-03', '1123', '2023-02-03');
 INSERT INTO `pasien` VALUES (31, 'eeqKucing', '223', '441', 'Laki-Laki', '2023-02-03', '2223', '2023-02-03');
+INSERT INTO `pasien` VALUES (32, 'Dera', 'Jl. H Aip. 1', '08787485', 'Laki-Laki', '2023-02-05', '3221323123', '2023-02-05');
+INSERT INTO `pasien` VALUES (33, 'ASUU', 'XX!@#', '223123', 'Laki-Laki', '2023-02-05', '23333', '2023-02-05');
+INSERT INTO `pasien` VALUES (34, 'tae', 'xx32', '22312', 'Laki-Laki', '2023-02-05', '2244', '2023-02-05');
 
 -- ----------------------------
 -- Table structure for pemeriksaan
@@ -157,21 +171,14 @@ CREATE TABLE `pemeriksaan`  (
   PRIMARY KEY (`id_pemeriksaan`) USING BTREE,
   INDEX `pemeriksaan_ibfk_2`(`id_medis`) USING BTREE,
   INDEX `pemeriksaan_ibfk_3`(`id_pasien`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pemeriksaan
 -- ----------------------------
-INSERT INTO `pemeriksaan` VALUES (1, 'Umum', 6, NULL, '2023-02-02 00:00:00', 'Kanker');
-INSERT INTO `pemeriksaan` VALUES (16, 'Umum', 23, 'DR0001', '2023-02-01 16:52:15', 'Geger Otak');
-INSERT INTO `pemeriksaan` VALUES (17, 'Umum', 24, 'DR0001', '2023-02-02 16:41:07', 'Hepatitis');
-INSERT INTO `pemeriksaan` VALUES (18, 'Umum', 25, 'DR0001', '2023-02-01 16:41:08', 'Otak miring');
-INSERT INTO `pemeriksaan` VALUES (19, 'Umum', 25, 'DR0001', '2023-02-02 16:41:10', 'Keseleo');
-INSERT INTO `pemeriksaan` VALUES (20, 'Umum', 23, NULL, '2023-02-02 16:52:59', NULL);
-INSERT INTO `pemeriksaan` VALUES (22, 'Umum', 27, 'DR0001', '2023-02-03 10:04:11', 'asuu');
-INSERT INTO `pemeriksaan` VALUES (23, 'Umum', 28, NULL, '2023-02-03 10:43:51', NULL);
-INSERT INTO `pemeriksaan` VALUES (24, 'Umum', 29, NULL, '2023-02-03 10:44:05', NULL);
-INSERT INTO `pemeriksaan` VALUES (26, 'Umum', 31, NULL, '2023-02-03 10:48:17', NULL);
+INSERT INTO `pemeriksaan` VALUES (27, 'Umum', 32, 'DR0001', '2023-02-05 21:17:34', 'Ganteng');
+INSERT INTO `pemeriksaan` VALUES (28, 'Umum', 33, NULL, '2023-02-05 21:33:15', NULL);
+INSERT INTO `pemeriksaan` VALUES (29, 'Umum', 34, NULL, '2023-02-05 21:59:47', NULL);
 
 -- ----------------------------
 -- Table structure for resep
@@ -183,34 +190,36 @@ CREATE TABLE `resep`  (
   PRIMARY KEY (`id_resep`) USING BTREE,
   INDEX `id_pemeriksaan_ibkf1`(`id_pemeriksaan`) USING BTREE,
   CONSTRAINT `id_pemeriksaan_ibkf1` FOREIGN KEY (`id_pemeriksaan`) REFERENCES `pemeriksaan` (`id_pemeriksaan`) ON DELETE SET NULL ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of resep
 -- ----------------------------
-INSERT INTO `resep` VALUES (1, 16);
-INSERT INTO `resep` VALUES (2, 22);
-INSERT INTO `resep` VALUES (3, 23);
-INSERT INTO `resep` VALUES (4, 24);
-INSERT INTO `resep` VALUES (6, 26);
+INSERT INTO `resep` VALUES (7, 27);
+INSERT INTO `resep` VALUES (8, 28);
+INSERT INTO `resep` VALUES (9, 29);
 
 -- ----------------------------
 -- Table structure for tenaga_medis
 -- ----------------------------
 DROP TABLE IF EXISTS `tenaga_medis`;
 CREATE TABLE `tenaga_medis`  (
-  `id_medis` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_medis` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `profesi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `nomor_telepon` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `id_user` int NULL DEFAULT NULL
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `profesi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `id_user` int NULL DEFAULT NULL,
+  PRIMARY KEY (`id_medis`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tenaga_medis
 -- ----------------------------
-INSERT INTO `tenaga_medis` VALUES ('DR0001', 'Dera', 'Dokter Umum', '087997565', 1);
-INSERT INTO `tenaga_medis` VALUES ('BDN001', 'Astuti', 'Bidan', '0875767', 2);
+INSERT INTO `tenaga_medis` VALUES ('BDN0001', 'xxc13', 'xs31', '244', '2223', 'Bidan', 0);
+INSERT INTO `tenaga_medis` VALUES ('BDN0002', 'yyyy', 'yyy', '223', 'yyy', 'Bidan', 13);
+INSERT INTO `tenaga_medis` VALUES ('DR0003', 'text', 'trt12', '211', '33', 'Dokter Umum', 15);
 
 -- ----------------------------
 -- Triggers structure for table detail_resep
