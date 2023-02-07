@@ -87,7 +87,7 @@ public class Resep extends javax.swing.JFrame {
     private void getObat(JComboBox paket){
          try{
             stt=CC.createStatement();
-            rs = stt.executeQuery("SELECT * FROM obat WHERE jumlah != 0 OR jumlah IS NOT NULL");
+            rs = stt.executeQuery("SELECT * FROM obat WHERE Jumlah>0");
             while(rs.next()){
                 paket.addItem(rs.getString("nama"));  
             }
