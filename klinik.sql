@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : db
+ Source Server         : connection
  Source Server Type    : MySQL
  Source Server Version : 100424
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 06/02/2023 01:19:18
+ Date: 07/02/2023 12:03:50
 */
 
 SET NAMES utf8mb4;
@@ -28,20 +28,14 @@ CREATE TABLE `accounts`  (
   `level` enum('Admin','Dokter','Bidan') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_user`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
-INSERT INTO `accounts` VALUES (1, 'admin', 'admin', 'Dokter');
-INSERT INTO `accounts` VALUES (2, 'bidan', 'bidan', 'Bidan');
-INSERT INTO `accounts` VALUES (6, 'daisy', 'daisy', 'Dokter');
-INSERT INTO `accounts` VALUES (8, '2312', '2312', 'Dokter');
-INSERT INTO `accounts` VALUES (9, 'xxx', 'xxx', 'Dokter');
-INSERT INTO `accounts` VALUES (10, '223123', '223123', 'Bidan');
-INSERT INTO `accounts` VALUES (12, 'xx31', 'xx31', 'Bidan');
-INSERT INTO `accounts` VALUES (13, '22221', '22221', 'Bidan');
-INSERT INTO `accounts` VALUES (15, 'Dialoge', 'Dialoge', 'Dokter');
+INSERT INTO `accounts` VALUES (1, 'admin', 'admin', 'Admin');
+INSERT INTO `accounts` VALUES (2, 'dokter', 'dokter', 'Dokter');
+INSERT INTO `accounts` VALUES (3, 'bidan', 'bidan', 'Bidan');
 
 -- ----------------------------
 -- Table structure for detail_resep
@@ -212,14 +206,14 @@ CREATE TABLE `tenaga_medis`  (
   `profesi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `id_user` int NULL DEFAULT NULL,
   PRIMARY KEY (`id_medis`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of tenaga_medis
 -- ----------------------------
-INSERT INTO `tenaga_medis` VALUES ('BDN0001', 'xxc13', 'xs31', '244', '2223', 'Bidan', 0);
-INSERT INTO `tenaga_medis` VALUES ('BDN0002', 'yyyy', 'yyy', '223', 'yyy', 'Bidan', 13);
-INSERT INTO `tenaga_medis` VALUES ('DR0003', 'text', 'trt12', '211', '33', 'Dokter Umum', 15);
+INSERT INTO `tenaga_medis` VALUES ('ADM0001', 'admin', 'admin', 'admin', 'admin', 'Admin', 1);
+INSERT INTO `tenaga_medis` VALUES ('BDN0003', 'bidan', 'bidan', 'bidan', 'bidan', 'Bidan', 3);
+INSERT INTO `tenaga_medis` VALUES ('DR0002', 'dokter', 'dokter', 'dokter', 'dokter', 'Dokter Umum', 2);
 
 -- ----------------------------
 -- Triggers structure for table detail_resep

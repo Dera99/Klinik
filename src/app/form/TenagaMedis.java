@@ -93,9 +93,11 @@ public class TenagaMedis extends Form {
             }
             String query = "INSERT INTO tenaga_medis (id_medis, nama, alamat, nomor_telepon, email, profesi) VALUES (?, ?, ?, ?, ?, ?)";
             pst = CC.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            idMedis = "BDN" + String.format("%04d", count);
+            idMedis = "ADM" + String.format("%04d", count);
             if (profesi.equals("Dokter Umum")) {
                 idMedis = "DR" + String.format("%04d", count);
+            } else if (profesi.equals("Bidan")){
+                idMedis = "BDN" + String.format("%04d", count);
             }
             pst.setString(1, idMedis);
             pst.setString(2, nama);
