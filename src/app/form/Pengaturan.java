@@ -1,9 +1,19 @@
 
 package app.form;
 
-public class RekamMedis extends javax.swing.JPanel {
+import app.configurations.koneksi;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
-    public RekamMedis() {
+public class Pengaturan extends javax.swing.JPanel {
+    ResultSet rs = null;
+    Connection CC = new koneksi().connect();;
+    PreparedStatement pst = null;
+    Statement stt;
+    String sql; 
+    public Pengaturan() {
         initComponents();
     }
 

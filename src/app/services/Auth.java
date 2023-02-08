@@ -30,6 +30,7 @@ public class Auth {
                 String idMedis = rs.getString("id_medis");
                 String nama = rs.getString("nama");
                 String profesi = rs.getString("profesi");
+                int idUser = rs.getInt("accounts.id_user");
          if (Password.equals(pass) && Username.equals(user)){
                     JOptionPane.showMessageDialog(frame, "Login Berhasil");
                     UserSession.setLevel(level);
@@ -37,6 +38,7 @@ public class Auth {
                     UserSession.setIdMedis(idMedis);
                     UserSession.setNamaMedis(nama);
                     UserSession.setProfesi(profesi);
+                    UserSession.setUserId(idUser);
                         Dashboard a = new Dashboard();
                         a.setVisible(true); 
                         frame.dispose();

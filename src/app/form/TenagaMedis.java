@@ -2,6 +2,7 @@ package app.form;
 
 import app.components.Form;
 import app.configurations.koneksi;
+import app.main.Resep;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 public class TenagaMedis extends Form {
@@ -33,9 +34,10 @@ public class TenagaMedis extends Form {
        model.addColumn("No Telp");
        model.addColumn("Email");
        model.addColumn("Profesi");
+       model.addColumn("User ID");
     try{
         stt=CC.createStatement();
-        rs = stt.executeQuery("SELECT * FROM tenaga_medis");
+        rs = stt.executeQuery("SELECT * FROM tenaga_medis JOIN accounts ON accounts.id_user = tenaga_medis.id_user");
         int no = 0;
         while(rs.next()){
             idMedis = rs.getString(1);
@@ -44,9 +46,14 @@ public class TenagaMedis extends Form {
             telp = rs.getString(4);
             email =rs.getString(5);
             profesi = rs.getString(6);
-            model.addRow(new Object[]{idMedis,nama,alamat,telp,email,profesi});
+            idUser = rs.getInt(7);
+            model.addRow(new Object[]{idMedis,nama,alamat,telp,email,profesi,idUser});
             table.setModel(model);
-        }
+        } 
+        TableColumn column = table.getColumnModel().getColumn(6);
+        column.setMinWidth(0);
+        column.setMaxWidth(0);
+        column.setPreferredWidth(0);
     }catch(SQLException e){
         e.printStackTrace();
     }
@@ -75,7 +82,7 @@ public class TenagaMedis extends Form {
             ex.printStackTrace();
         }
     }
-    private  void addMedis(){
+    private  void addData(){
         nama = txtNama.getText();
         alamat = txtAlamat.getText();
         email = txtEmail.getText();
@@ -83,23 +90,9 @@ public class TenagaMedis extends Form {
         username = txtUser.getText();
         profesi = (String) txtProfesi.getSelectedItem();
         try {
-            stt=CC.createStatement(); 
-            String countQuery = "SELECT COUNT(id_medis) FROM tenaga_medis";
-            rs = stt.executeQuery(countQuery);
-            int count = 0;
-            
-            if (rs.next()) {
-                count = rs.getInt(1) + 1;
-            }
             String query = "INSERT INTO tenaga_medis (id_medis, nama, alamat, nomor_telepon, email, profesi) VALUES (?, ?, ?, ?, ?, ?)";
             pst = CC.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            idMedis = "ADM" + String.format("%04d", count);
-            if (profesi.equals("Dokter Umum")) {
-                idMedis = "DR" + String.format("%04d", count);
-            } else if (profesi.equals("Bidan")){
-                idMedis = "BDN" + String.format("%04d", count);
-            }
-            pst.setString(1, idMedis);
+            pst.setString(1, generateId(profesi));
             pst.setString(2, nama);
             pst.setString(3, alamat);
             pst.setString(4, telp);
@@ -113,12 +106,61 @@ public class TenagaMedis extends Form {
         }
     }
     private void updateUser(){
-         try {
+        try {
             sql="UPDATE tenaga_medis SET id_user = "+idUser+" WHERE id_medis='"+idMedis+"'";
             pst = CC.prepareStatement(sql);
             pst.execute();
         } catch (SQLException ex) {
            ex.printStackTrace();
+        }
+    }
+    private String generateId(String profesi){
+         try {
+            stt=CC.createStatement(); 
+            String countQuery = "SELECT COUNT(id_medis) FROM tenaga_medis";
+            rs = stt.executeQuery(countQuery);
+            int count = 0;    
+            if (rs.next()) {
+                count = rs.getInt(1) + 1;
+            }
+            idMedis = "ADM" + String.format("%04d", count);
+            if (profesi.equals("Dokter Umum")) {
+                idMedis = "DR" + String.format("%04d", count);
+            } else if (profesi.equals("Bidan")){
+                idMedis = "BDN" + String.format("%04d", count);
+            }
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+           JOptionPane.showMessageDialog(this, ex);
+        }
+        return idMedis;
+    }
+    
+    private void updateData(){
+        nama = txtNama.getText();
+        alamat = txtAlamat.getText();
+        email = txtEmail.getText();
+        telp = txtTelp.getText();
+        profesi = (String) txtProfesi.getSelectedItem();
+        username = txtUser.getText();
+        
+        try {
+            sql="UPDATE tenaga_medis SET id_medis='"+generateId(profesi)+"' ,nama = '"+nama+"', alamat='"+alamat+"', email='"+email+"', nomor_telepon='"+telp+"', profesi='"+profesi+"' WHERE id_user="+idUser+"";
+            pst = CC.prepareStatement(sql);
+            pst.execute();
+        } catch (SQLException ex) {
+           ex.printStackTrace();
+           JOptionPane.showMessageDialog(this, ex);
+        }
+    }
+    private void deleteData(){
+         try {
+            sql = "DELETE FROM tenaga_medis WHERE id_medis = '"+idMedis+"'";
+            pst = CC.prepareStatement(sql);
+            pst.execute();
+            pst.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Resep.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     @SuppressWarnings("unchecked")
@@ -146,30 +188,37 @@ public class TenagaMedis extends Form {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         txtProfesi = new javax.swing.JComboBox<>();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        titik = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(241, 253, 243));
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
-                "ID Tenaga Medis", "Nama", "Alamat", "No Telp", "Email", "Profesi"
+                "ID Tenaga Medis", "Nama", "Alamat", "No Telp", "Email", "Profesi", "User ID"
             }
         ));
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tableMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(table);
 
         jLabel3.setText("Nama");
 
         jLabel7.setText("Email");
 
-        jButton3.setText("Hapus");
+        jButton3.setText("Ubah");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel9.setText(":");
 
@@ -184,7 +233,12 @@ public class TenagaMedis extends Form {
 
         jLabel11.setText(":");
 
-        jButton2.setText("Ubah");
+        jButton2.setText("Hapus");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Alamat");
 
@@ -202,9 +256,9 @@ public class TenagaMedis extends Form {
 
         txtProfesi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dokter Umum", "Bidan", "Admin" }));
 
-        jLabel15.setText("Username");
+        lblUser.setText("Username");
 
-        jLabel16.setText(":");
+        titik.setText(":");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -233,29 +287,25 @@ public class TenagaMedis extends Form {
                                 .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel13)
+                            .addComponent(lblUser))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(50, 50, 50)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtProfesi, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel15)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(titik))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtProfesi, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(151, 151, 151))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -294,9 +344,9 @@ public class TenagaMedis extends Form {
                             .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel15)
+                            .addComponent(lblUser)
                             .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel16)))
+                            .addComponent(titik)))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -314,10 +364,40 @@ public class TenagaMedis extends Form {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
-        addMedis();
+        addData();
         addAccount();
         initTable();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        updateData();
+        initTable();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
+        // TODO add your handling code here:
+        int row = table.getSelectedRow();
+        idMedis = (String) table.getValueAt(row, 0);
+        nama = (String) table.getValueAt(row, 1);
+        alamat = (String) table.getValueAt(row, 2);
+        telp = (String) table.getValueAt(row, 3);
+        email = (String) table.getValueAt(row, 4);
+        profesi = (String) table.getValueAt(row, 5);
+        idUser = (Integer) table.getValueAt(row, 6);
+        txtNama.setText(nama);
+        txtAlamat.setText(alamat);
+        txtTelp.setText(telp);
+        txtEmail.setText(email);
+        txtProfesi.setSelectedItem(profesi);
+        
+    }//GEN-LAST:event_tableMouseReleased
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        deleteData();
+        initTable();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -329,8 +409,6 @@ public class TenagaMedis extends Form {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -338,7 +416,9 @@ public class TenagaMedis extends Form {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JTable table;
+    private javax.swing.JLabel titik;
     private javax.swing.JTextArea txtAlamat;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtNama;

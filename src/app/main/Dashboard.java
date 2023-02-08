@@ -5,7 +5,7 @@ import app.form.Beranda;
 import app.form.DataPasien;
 import app.form.JadwalPelayanan;
 import app.form.Laporan;
-import app.form.RekamMedis;
+import app.form.Pengaturan;
 import app.form.TenagaMedis;
 import app.form.DataObat;
 import app.form.Pemeriksaan;
@@ -33,20 +33,24 @@ public class Dashboard extends javax.swing.JFrame {
                 }else if(index==2){
                     mainBody.displayForm(new Pemeriksaan(),"Pemeriksaan");
                 }else if(index==3){
-                    mainBody.displayForm(new DataObat(),"Data Obat");
+                    mainBody.displayForm(new JadwalPelayanan(),"Jadwal Pelayanan");
                 }else if (index==4){
-                    mainBody.displayForm(new DataPasien(),"Data Pasien");
-                }else if (index==5){
-                    mainBody.displayForm(new TenagaMedis(),"Daftar Tenaga Medis");
-                }else if (index==6){
                     mainBody.displayForm(new DataObat(),"Data Obat");
+                }else if (index==5){
+                    mainBody.displayForm(new DataPasien(),"Daata Pasien");
+                }else if (index==6){
+                    mainBody.displayForm(new TenagaMedis(),"Daftar Tenaga Medis");
                 }else if (index==7){
                     mainBody.displayForm(new Laporan(), "Laporan");
                 }else if (index==8){
-                     Login a = new Login();
+                    Login a = new Login();
                     a.setVisible(true);
-//                    UserSession.setUserLogin("");
-//                    UserSession.setUserId(0);
+                    UserSession.setLevel("");
+                    UserSession.setUserLogin(""); 
+                    UserSession.setIdMedis("");
+                    UserSession.setNamaMedis("");
+                    UserSession.setProfesi("");
+                    UserSession.setUserId(0);
                     dispose();  
                 }
 //                else if(index == 2){
