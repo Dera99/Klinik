@@ -1,7 +1,7 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : connection
+ Source Server         : db
  Source Server Type    : MySQL
  Source Server Version : 100424
  Source Host           : localhost:3306
@@ -11,7 +11,7 @@
  Target Server Version : 100424
  File Encoding         : 65001
 
- Date: 07/02/2023 12:03:50
+ Date: 09/02/2023 00:16:20
 */
 
 SET NAMES utf8mb4;
@@ -28,14 +28,14 @@ CREATE TABLE `accounts`  (
   `level` enum('Admin','Dokter','Bidan') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id_user`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of accounts
 -- ----------------------------
 INSERT INTO `accounts` VALUES (1, 'admin', 'admin', 'Admin');
 INSERT INTO `accounts` VALUES (2, 'dokter', 'dokter', 'Dokter');
-INSERT INTO `accounts` VALUES (3, 'bidan', 'bidan', 'Bidan');
+INSERT INTO `accounts` VALUES (4, 'bidan', 'bidan', 'Bidan');
 
 -- ----------------------------
 -- Table structure for detail_resep
@@ -66,17 +66,20 @@ INSERT INTO `detail_resep` VALUES (13, 9, 'PST-0021', '3x3', 6);
 -- ----------------------------
 DROP TABLE IF EXISTS `jadwal_pelayanan`;
 CREATE TABLE `jadwal_pelayanan`  (
-  `id_jadwal` int NOT NULL,
+  `id_jadwal` int NOT NULL AUTO_INCREMENT,
   `id_medis` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `hari` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `jam_mulai` time NULL DEFAULT NULL,
   `jam_selesai` time NULL DEFAULT NULL,
   PRIMARY KEY (`id_jadwal`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of jadwal_pelayanan
 -- ----------------------------
+INSERT INTO `jadwal_pelayanan` VALUES (1, 'DR0003', 'Senin-Kamis', '04:00:00', '09:00:00');
+INSERT INTO `jadwal_pelayanan` VALUES (2, 'DR003', 'Senin-Kamis', '04:00:00', '14:00:00');
+INSERT INTO `jadwal_pelayanan` VALUES (4, 'BDN0004', 'Senin-Jumat', '09:00:00', '15:00:00');
 
 -- ----------------------------
 -- Table structure for obat
@@ -212,8 +215,8 @@ CREATE TABLE `tenaga_medis`  (
 -- Records of tenaga_medis
 -- ----------------------------
 INSERT INTO `tenaga_medis` VALUES ('ADM0001', 'admin', 'admin', 'admin', 'admin', 'Admin', 1);
-INSERT INTO `tenaga_medis` VALUES ('BDN0003', 'bidan', 'bidan', 'bidan', 'bidan', 'Bidan', 3);
-INSERT INTO `tenaga_medis` VALUES ('DR0002', 'dokter', 'dokter', 'dokter', 'dokter', 'Dokter Umum', 2);
+INSERT INTO `tenaga_medis` VALUES ('BDN0004', 'bidan', 'bidan	', '08878', 'bidan', 'Bidan', 4);
+INSERT INTO `tenaga_medis` VALUES ('DR0003', 'dokter', 'dokter', 'dokter', 'dokter', 'Dokter Umum', 2);
 
 -- ----------------------------
 -- Triggers structure for table detail_resep
@@ -245,6 +248,17 @@ delimiter ;;
 CREATE TRIGGER `tr_insert_resep` AFTER INSERT ON `resep` FOR EACH ROW BEGIN
   INSERT INTO detail_resep (id_detail, id_resep) 
   VALUES (NULL, NEW.id_resep);
+END
+;;
+delimiter ;
+
+-- ----------------------------
+-- Triggers structure for table tenaga_medis
+-- ----------------------------
+DROP TRIGGER IF EXISTS `tenaga_medis_before_delete`;
+delimiter ;;
+CREATE TRIGGER `tenaga_medis_before_delete` BEFORE DELETE ON `tenaga_medis` FOR EACH ROW BEGIN
+  DELETE FROM accounts WHERE id_user = OLD.id_user;
 END
 ;;
 delimiter ;
