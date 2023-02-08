@@ -148,6 +148,7 @@ public class TenagaMedis extends Form {
             sql="UPDATE tenaga_medis SET id_medis='"+generateId(profesi)+"' ,nama = '"+nama+"', alamat='"+alamat+"', email='"+email+"', nomor_telepon='"+telp+"', profesi='"+profesi+"' WHERE id_user="+idUser+"";
             pst = CC.prepareStatement(sql);
             pst.execute();
+            pst.close();
         } catch (SQLException ex) {
            ex.printStackTrace();
            JOptionPane.showMessageDialog(this, ex);
