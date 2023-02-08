@@ -77,7 +77,9 @@ public class JadwalPelayanan extends Form {
         e.printStackTrace();
     }
     }
-    
+    private void getNama(String pelayanan){
+       
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
