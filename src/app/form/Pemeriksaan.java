@@ -38,7 +38,7 @@ public class Pemeriksaan extends Form {
         }else{
             header="Bidan";
         }
-                model.addColumn("ID Pemeriksaan");
+                model.addColumn("ID Periksa");
                 model.addColumn("ID Pasien");
                 model.addColumn("Nama Pasien");
                 model.addColumn("Jenis Kelamin");
@@ -111,9 +111,6 @@ public class Pemeriksaan extends Form {
         }catch(SQLException e){
             System.err.println(e);
         }
-    }
-    private void getResep(int periksaID){
-        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

@@ -61,7 +61,7 @@ public class PendaftaranPasien extends Form {
         telp = txtTelp.getText();
         gender = (String) cbGender.getSelectedItem();
         if(radioPribadi.isSelected()){
-        kode="";
+        kode=null;
         }else{
         kode=txtKode.getText();
         }

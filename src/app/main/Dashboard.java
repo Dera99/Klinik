@@ -2,7 +2,7 @@
 package app.main;
 
 import app.form.Beranda;
-import app.form.DataPasien;
+import app.form.DaftarPeriksa;
 import app.form.JadwalPelayanan;
 import app.form.Laporan;
 import app.form.Pengaturan;
@@ -12,11 +12,11 @@ import app.form.Pemeriksaan;
 import app.form.PendaftaranPasien;
 import app.menu.EventMenu;
 import app.services.UserSession;
+import javax.swing.JFrame;
 
 
 public class Dashboard extends javax.swing.JFrame {
 
-  
     public Dashboard() {
         initComponents();
         init();
@@ -37,12 +37,14 @@ public class Dashboard extends javax.swing.JFrame {
                 }else if (index==4){
                     mainBody.displayForm(new DataObat(),"Data Obat");
                 }else if (index==5){
-                    mainBody.displayForm(new DataPasien(),"Daata Pasien");
+                    mainBody.displayForm(new DaftarPeriksa(),"Daftar Pemeriksaan");
                 }else if (index==6){
                     mainBody.displayForm(new TenagaMedis(),"Daftar Tenaga Medis");
                 }else if (index==7){
                     mainBody.displayForm(new Laporan(), "Laporan");
                 }else if (index==8){
+                    mainBody.displayForm(new Pengaturan(), "Pengaturan");
+                }else if (index==9){
                     Login a = new Login();
                     a.setVisible(true);
                     UserSession.setLevel("");
@@ -52,17 +54,12 @@ public class Dashboard extends javax.swing.JFrame {
                     UserSession.setProfesi("");
                     UserSession.setUserId(0);
                     dispose();  
-                }
-//                else if(index == 2){
-//                    Login a = new Login();
-//                    a.setVisible(true);
-////                    UserSession.setUserLogin("");
-////                    UserSession.setUserId(0);
-//                    dispose();  
-//                }    
+                } 
             }
         });
+        menu.setSelectedMenu(0);
         mainBody.displayForm(new Beranda(),"Beranda");
+       
     }
 
     @SuppressWarnings("unchecked")
@@ -107,7 +104,6 @@ public class Dashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -133,12 +129,17 @@ public class Dashboard extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Dashboard().setVisible(true);
+                frame=new Dashboard();
+                frame.setVisible(true);
             }
         });
+    }
+    private static  JFrame frame;
+    public static JFrame getJFrame(){
+        return frame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

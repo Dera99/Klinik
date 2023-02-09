@@ -13,6 +13,7 @@ import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -43,7 +44,16 @@ public class MenuButton extends JButton {
     private Point pressedPoint;
     private float alpha;
     private Color effectColor = new Color(173, 173, 173);
-
+    private int index;
+    public MenuButton(int index) {
+        this.index = index;
+        setContentAreaFilled(false);
+        setForeground(new Color(189, 189, 189));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setHorizontalAlignment(SwingConstants.LEFT);
+        setBackground(new Color(65, 65, 65));
+        setBorder(new EmptyBorder(8, 20, 8, 15));
+    }
     public MenuButton() {
         setContentAreaFilled(false);
         setBorder(new EmptyBorder(5, 10, 5, 10));
@@ -100,5 +110,8 @@ public class MenuButton extends JButton {
         area.add(new Area(new RoundRectangle2D.Float(width - r, 0, r, r, 5, 5)));
         area.add(new Area(new RoundRectangle2D.Float(0, height - r, r, r, 5, 5)));
         return area;
+    }
+    public int getIndex() {
+        return index;
     }
 }

@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.event.MenuEvent;
 import net.miginfocom.swing.MigLayout;
 import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
@@ -27,6 +29,9 @@ import org.jdesktop.animation.timing.interpolation.PropertySetter;
 
 public class Menu extends javax.swing.JPanel {
 
+    private MenuButton selectedMenu;
+    private MenuButton unSelectedMenu;
+    private EventMenu event;
     public int getSelectedLocation() {
         return selectedLocation;
     }
@@ -49,28 +54,43 @@ public class Menu extends javax.swing.JPanel {
 
     public Menu() {
         initComponents();
+        txtNama.setText(UserSession.getNamaMedis());
         setOpaque(false);
         setBackground(Color.WHITE);
+        
         menu.setLayout(new MigLayout("fillx, wrap, inset 0", "[fill]", "[fill, 36!]0[fill, 36!]"));
         initMenu();
     }
 
-    private void initMenu() {
-        String level = UserSession.getLevel();
-        //if(level.equals("Admin")){
+    public void initMenu(EventMenu event) {
+       this.event = event;
+       String level = UserSession.getLevel();
+       if(level.equals("Admin")){
         addMenu("Beranda", null, 0);
         addMenu("Pendaftaran Pasien", null, 1);
-        addMenu("Pemeriksaan", null, 2);
+        //addMenu("Pemeriksaan", null, 2);
         addMenu("Jadwal Pelayanan", null, 3);
         addMenu("Data Obat", null, 4);
-        addMenu("Data Pasien", null,5);
+        addMenu("Daftar Periksa", null,5);
         addMenu("Tenaga Medis", null,6);
         addMenu("Laporan", null,7);
-        addMenu("Logout",null,8);
-//        }else if(level.equals("Umum")){
-//    
-//        }
-        //  add more menu here
+        addMenu("Pengaturan", null,8);
+        addMenu("Logout",null,9);
+       }else{
+        addMenu("Beranda", null, 0);
+        //addMenu("Pendaftaran Pasien", null, 1);
+        addMenu("Pemeriksaan", null, 2);
+        //addMenu("Jadwal Pelayanan", null, 3);
+        //addMenu("Data Obat", null, 4);
+        addMenu("Daftar Periksa", null,5);
+        //addMenu("Tenaga Medis", null,6);
+        //addMenu("Laporan", null,7);
+        addMenu("Pengaturan", null,8);
+        addMenu("Logout",null,9);
+       }
+    }
+    private void initMenu() {
+        initMenu(event);
         menu.repaint();
         menu.revalidate();
         setSelectedMenu(0);
@@ -93,7 +113,7 @@ public class Menu extends javax.swing.JPanel {
     }
 
     private void addMenu(String menuName, String icon, int index) {
-        MenuButton m = new MenuButton();
+        MenuButton m = new MenuButton(index);
         m.setIcoName(icon);
         //m.setIcon(new ImageIcon(getClass().getResource("/app/icon/" + icon + ".png")));
         m.setFont(m.getFont().deriveFont(Font.BOLD, 12));
@@ -103,7 +123,7 @@ public class Menu extends javax.swing.JPanel {
         m.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (index != selectedIndex) {
+                if (m.getIndex() != selectedIndex) {
                     if (animator.isRunning()) {
                         animator.stop();
                     }
@@ -155,10 +175,14 @@ public class Menu extends javax.swing.JPanel {
     }
 
     public void setSelectedMenu(int index) {
-        MenuButton cmd = (MenuButton) menu.getComponent(index);
-        cmd.setForeground(Color.WHITE);
-        cmd.setEffectColor(Color.WHITE);
-        //cmd.setIcon(new ImageIcon(getClass().getResource("/app/icon/" + cmd.getIcoName() + "_s.png")));
+        for (Component com : menu.getComponents()) {
+            MenuButton btn = (MenuButton) com;
+            if(index == btn.getIndex()){
+                btn.setForeground(Color.WHITE);
+                btn.setEffectColor(Color.WHITE);
+                break;
+            }
+        }
     }
 
     private void runEvent() {
@@ -172,8 +196,8 @@ public class Menu extends javax.swing.JPanel {
     private void initComponents() {
 
         menu = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        txtBrand = new javax.swing.JLabel();
+        txtNama = new javax.swing.JLabel();
         imageAvatar1 = new app.themes.ImageAvatar();
 
         menu.setOpaque(false);
@@ -189,23 +213,23 @@ public class Menu extends javax.swing.JPanel {
             .addGap(0, 489, Short.MAX_VALUE)
         );
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(117, 117, 117));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Dashboard UI");
+        txtBrand.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        txtBrand.setForeground(new java.awt.Color(117, 117, 117));
+        txtBrand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtBrand.setText("KLINIK dr. FAYRUZ");
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(154, 154, 154));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Admin");
+        txtNama.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        txtNama.setForeground(new java.awt.Color(154, 154, 154));
+        txtNama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNama.setText("Admin");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(imageAvatar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
+            .addComponent(txtNama, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(txtBrand, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -214,9 +238,9 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
-                .addComponent(jLabel1)
+                .addComponent(txtBrand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(txtNama)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -225,8 +249,8 @@ public class Menu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private app.themes.ImageAvatar imageAvatar1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel menu;
+    private javax.swing.JLabel txtBrand;
+    private javax.swing.JLabel txtNama;
     // End of variables declaration//GEN-END:variables
 }
