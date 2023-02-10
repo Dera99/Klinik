@@ -216,7 +216,7 @@ public class Menu extends javax.swing.JPanel {
         txtBrand.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         txtBrand.setForeground(new java.awt.Color(117, 117, 117));
         txtBrand.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtBrand.setText("KLINIK dr. FAYRUZ");
+        txtBrand.setText("KLINIK dr. FAYRUS");
 
         txtNama.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
         txtNama.setForeground(new java.awt.Color(154, 154, 154));
