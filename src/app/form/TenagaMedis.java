@@ -107,7 +107,9 @@ public class TenagaMedis extends Form {
             pst.execute();
             rs.close();
             pst.close();
+            JOptionPane.showMessageDialog(this, "Data Berhasil Ditambahkan !");
         } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this, "Gagal Menambahkan Data !");
             Logger.getLogger(TenagaMedis.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -268,7 +270,7 @@ public class TenagaMedis extends Form {
 
         titik.setText(":");
 
-        jButton5.setText("Clear");
+        jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -389,8 +391,13 @@ public class TenagaMedis extends Form {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Update Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         updateData();
         initTable();
+         }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
@@ -417,8 +424,13 @@ public class TenagaMedis extends Form {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         deleteData();
         initTable();
+         }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

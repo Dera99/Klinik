@@ -156,7 +156,7 @@ public class Pengaturan extends Form {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if(check()==true){
             updatePassword();
-            JOptionPane.showMessageDialog(panel1, "Password Berhasil di Simpan !");
+            JOptionPane.showMessageDialog(this, "Password Berhasil di Simpan !");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

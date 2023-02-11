@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 public class Pemeriksaan extends Form {
     ResultSet rs = null;
@@ -54,7 +55,7 @@ public class Pemeriksaan extends Form {
                       idPasien = rs.getInt("id_pasien");
                       idMedis = rs.getString("tenaga_medis.id_medis");
                       diagnosa = rs.getString("diagnosa");
-                      nama = rs.getString("pasien.nama");
+                      nama = rs.getString("pasien.nama_pasien");
                       gender = rs.getString("jenis_kelamin");
                       tgl = rs.getDate("tanggal");
                       medis = rs.getString("tenaga_medis.nama");
@@ -87,7 +88,7 @@ public class Pemeriksaan extends Form {
               pelayanan = rs.getString("pelayanan");
               idPasien = rs.getInt("id_pasien");
               diagnosa = rs.getString("diagnosa");
-              nama = rs.getString("nama");
+              nama = rs.getString("nama_pasien");
               gender = rs.getString("jenis_kelamin");
               tgl = rs.getDate("tanggal");
              model.addRow(new Object[]{idPeriksa,idPasien,nama,gender,pelayanan});
@@ -107,9 +108,11 @@ public class Pemeriksaan extends Form {
         pst.setString(2, txtDiagnosa.getText());
         pst.execute();
         rs.close();
-        pst.close();   
+        pst.close();  
+        JOptionPane.showMessageDialog(this, "Diagnosa Berhasil Disimpan !");
         }catch(SQLException e){
             System.err.println(e);
+            JOptionPane.showMessageDialog(this, "Gagal Menambahkan Diagnosa !");
         }
     }
     @SuppressWarnings("unchecked")

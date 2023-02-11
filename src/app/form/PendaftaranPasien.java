@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class PendaftaranPasien extends Form {
     ResultSet rs = null;
@@ -39,7 +40,7 @@ public class PendaftaranPasien extends Form {
         pst = CC.prepareStatement(sql);
         rs = pst.executeQuery();
         if(rs.next()){
-            String nama = rs.getString("nama");
+            String nama = rs.getString("nama_pasien");
             String alamat = rs.getString("alamat");
             String no_telp = rs.getString("no_telp");
             String jenis_kelamin = rs.getString("jenis_kelamin");
@@ -50,6 +51,9 @@ public class PendaftaranPasien extends Form {
             txtTelp.setText(no_telp);
             cbGender.setSelectedItem(jenis_kelamin);
             txtTanggal.setText(ttl);
+            JOptionPane.showMessageDialog(this, "Pasien Ditemukan !");
+        }else{
+            JOptionPane.showMessageDialog(this, "Pasien Tidak Ditemukan !");
         }
     }
     private void daftarPasien() throws SQLException, ParseException{
@@ -65,7 +69,7 @@ public class PendaftaranPasien extends Form {
         }else{
         kode=txtKode.getText();
         }
-            sql = "SELECT id_pasien FROM pasien WHERE nama=? AND alamat=? AND no_telp=? AND jenis_kelamin=? AND ttl=? AND kode_asuransi=?";
+            sql = "SELECT id_pasien FROM pasien WHERE nama_pasien=? AND alamat=? AND no_telp=? AND jenis_kelamin=? AND ttl=? AND kode_asuransi=?";
             pst = CC.prepareStatement(sql);
             pst.setString(1, nama);
             pst.setString(2, alamat);
@@ -77,7 +81,7 @@ public class PendaftaranPasien extends Form {
             if(rs.next()) {
             idPasien = rs.getInt("id_pasien");
         } else {
-            sql = "INSERT INTO pasien (nama,alamat,no_telp,jenis_kelamin,ttl,kode_asuransi)VALUES(?,?,?,?,?,?)";
+            sql = "INSERT INTO pasien (nama_pasien,alamat,no_telp,jenis_kelamin,ttl,kode_asuransi)VALUES(?,?,?,?,?,?)";
             pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, nama);
             pst.setString(2, alamat);
@@ -339,8 +343,10 @@ public class PendaftaranPasien extends Form {
             // TODO add your handling code here:
             daftarPasien();
             daftarPemeriksaan();
+            JOptionPane.showMessageDialog(this, "Pendaftaran Pasien Berhasil !");
         } catch (SQLException ex) {
             Logger.getLogger(PendaftaranPasien.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(this, ex);
         } catch (ParseException ex) {
             Logger.getLogger(PendaftaranPasien.class.getName()).log(Level.SEVERE, null, ex);
         }

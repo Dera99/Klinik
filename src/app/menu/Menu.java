@@ -223,6 +223,8 @@ public class Menu extends javax.swing.JPanel {
         txtNama.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNama.setText("Admin");
 
+        imageAvatar1.setImage(new javax.swing.ImageIcon(getClass().getResource("/app/report/logo1.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(

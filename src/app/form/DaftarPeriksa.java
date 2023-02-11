@@ -50,7 +50,7 @@ public class DaftarPeriksa extends javax.swing.JPanel {
             idPasien = rs.getInt("id_pasien");
             idMedis = rs.getString("id_medis");
             diagnosa = rs.getString("diagnosa");
-            nama = rs.getString("pasien.nama");
+            nama = rs.getString("pasien.nama_pasien");
             gender = rs.getString("jenis_kelamin");
             tgl = rs.getDate("tanggal");
             model.addRow(new Object[]{idPeriksa, no++,idPasien, nama, gender, pelayanan, idMedis, diagnosa, tgl});

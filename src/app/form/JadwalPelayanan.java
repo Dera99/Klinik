@@ -145,9 +145,10 @@ public class JadwalPelayanan extends Form {
             pst.execute();
             rs.close();
             pst.close();
+            JOptionPane.showMessageDialog(this, "Jadwal Berhasil Ditambahkan !");
         } catch (SQLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(btnAdd, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
     }
     private void updateData(){
@@ -164,7 +165,7 @@ public class JadwalPelayanan extends Form {
             pst.execute();
         } catch (SQLException ex) {
            ex.printStackTrace();
-            JOptionPane.showMessageDialog(btnUpdate, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
     }
     private void deleteData(){
@@ -175,7 +176,7 @@ public class JadwalPelayanan extends Form {
             pst.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
-            JOptionPane.showMessageDialog(btnDelete, ex);
+            JOptionPane.showMessageDialog(this, ex);
         }
     }
     @SuppressWarnings("unchecked")
@@ -458,16 +459,26 @@ public class JadwalPelayanan extends Form {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Update Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         updateData();
         initTable1();
         initTable2();
+        }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         deleteData();
         initTable1();
         initTable2();
+        }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
 

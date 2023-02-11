@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -69,7 +70,7 @@ public class DataObat extends Form{
        expired =  format.parse(txtExpired.getText());
        java.sql.Date sqlDate = new java.sql.Date(expired.getTime());
        try{
-           sql="Insert Into obat (id_obat,nama,harga,jumlah,dosis,expired) VALUES (?,?,?,?,?,?)";
+           sql="Insert Into obat (id_obat,nama_obat,harga,jumlah,dosis,expired) VALUES (?,?,?,?,?,?)";
            pst = CC.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
            pst.setString(1,kode);
            pst.setString(2, nama);
@@ -82,8 +83,10 @@ public class DataObat extends Form{
            kode = rs.getString(1);
            rs.close();
            pst.close();
+           JOptionPane.showMessageDialog(this, "Data Obat Berhasil Ditambahkan !");
        }catch(SQLException e){
            e.printStackTrace();
+           JOptionPane.showMessageDialog(this, e);
        }
     }
     private void updateObat() throws ParseException{
@@ -95,7 +98,7 @@ public class DataObat extends Form{
        expired =  format.parse(txtExpired.getText());
        java.sql.Date sqlDate = new java.sql.Date(expired.getTime());
        try{
-           sql="UPDATE obat SET nama=?,harga=?,jumlah=?,dosis=?,expired=? WHERE id_obat='"+kode+"'";
+           sql="UPDATE obat SET nama_obat=?,harga=?,jumlah=?,dosis=?,expired=? WHERE id_obat='"+kode+"'";
            pst = CC.prepareStatement(sql);
            pst.setString(1, nama);
            pst.setInt(2, harga);
@@ -379,8 +382,13 @@ public class DataObat extends Form{
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         try {
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Update Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
             updateObat();
             initTable();
+         }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
         } catch (ParseException ex) {
             Logger.getLogger(DataObat.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -388,8 +396,13 @@ public class DataObat extends Form{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         deleteObat();
         initTable();
+         }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

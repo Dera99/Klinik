@@ -2,16 +2,28 @@ package app.main;
 
 import app.configurations.koneksi;
 import app.services.UserSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 
 public class Resep extends javax.swing.JFrame {
@@ -69,7 +81,7 @@ public class Resep extends javax.swing.JFrame {
             idDetail = rs.getInt("id_detail");
             resep = rs.getInt("id_resep");
             idObat = rs.getString("id_obat");
-            nama = rs.getString("obat.nama");
+            nama = rs.getString("obat.nama_obat");
             aturan = rs.getString("detail_resep.aturan");
             jumlah = rs.getInt("detail_resep.jumlah");
             model.addRow(new Object[]{idDetail,no,idObat,nama,aturan,jumlah});
@@ -102,7 +114,7 @@ public class Resep extends javax.swing.JFrame {
             stt=CC.createStatement();
             rs = stt.executeQuery("SELECT * FROM obat WHERE Jumlah>0");
             while(rs.next()){
-                paket.addItem(rs.getString("nama"));  
+                paket.addItem(rs.getString("nama_obat"));  
             }
         }catch(SQLException e){
             System.err.println(e);
@@ -111,7 +123,7 @@ public class Resep extends javax.swing.JFrame {
     private String getIdObat(String obat){
         try{
             stt=CC.createStatement();
-            rs = stt.executeQuery("SELECT * FROM obat WHERE obat.nama='"+obat+"'");
+            rs = stt.executeQuery("SELECT * FROM obat WHERE obat.nama_obat='"+obat+"'");
             if(rs.next()){
                 idObat = rs.getString("id_obat");  
             }
@@ -188,6 +200,21 @@ public class Resep extends javax.swing.JFrame {
             Logger.getLogger(Resep.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+     public void printResep(int id) throws SQLException {
+         try{
+            HashMap param = new HashMap();
+            param.put("id",id);
+            InputStream file = new FileInputStream(new File("src/app/report/Laporan Resep Obat.jrxml"));
+            JasperDesign jd = JRXmlLoader.load(file);
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+            JasperPrint jp = JasperFillManager.fillReport(jr,param,CC);
+            JasperViewer jv = new JasperViewer(jp, false);
+            jv.setVisible(true);
+        }catch(Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -259,6 +286,11 @@ public class Resep extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cetak");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Ubah");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -405,8 +437,13 @@ public class Resep extends javax.swing.JFrame {
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Update Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         updateObat();
         initTable();
+         }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void tableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseReleased
@@ -424,9 +461,23 @@ public class Resep extends javax.swing.JFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        int response = JOptionPane.showConfirmDialog(this, "Apakah Anda Yakin?", "Konfirmasi Hapus Data", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(response==JOptionPane.YES_OPTION){
         deleteObat();
         initTable();
+          }else if(response==JOptionPane.NO_OPTION){
+              System.err.println("Failed");
+        }   
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            // TODO add your handling code here:
+            printResep(getResep());
+        } catch (SQLException ex) {
+            Logger.getLogger(Resep.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
