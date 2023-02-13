@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64120e3f-86ec-4d79-8035-6c4beaa5a713">
 	<property name="ireport.zoom" value="1.6105100000000032"/>
-	<property name="ireport.x" value="260"/>
+	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="145"/>
 	<parameter name="start" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -18,7 +18,7 @@
 	<field name="id_pasien" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="nama" class="java.lang.String">
+	<field name="nama_pasien" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alamat" class="java.lang.String">
@@ -202,7 +202,7 @@
 			<textField>
 				<reportElement x="144" y="1" width="100" height="19" uuid="b0d86237-51c3-4a8c-9673-a5bded8c75dd"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{nama}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{nama_pasien}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="344" y="1" width="107" height="19" uuid="9e086d26-5259-4e46-93fa-634abe70b13c"/>

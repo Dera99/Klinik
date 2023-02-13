@@ -79,8 +79,8 @@ public class DataObat extends Form{
            pst.setString(5, dosis);
            pst.setDate(6, sqlDate);
            pst.execute();
-           rs = pst.getGeneratedKeys();
-           kode = rs.getString(1);
+           //rs = pst.getGeneratedKeys();
+           //kode = rs.getString(1);
            rs.close();
            pst.close();
            JOptionPane.showMessageDialog(this, "Data Obat Berhasil Ditambahkan !");
