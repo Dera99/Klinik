@@ -3,46 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/services/Auth.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/JadwalPelayanan.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/chart/ModelLegend.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/report/Laporan%20Resep%20Obat.jrxml</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/Pengaturan.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/Beranda.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/menu/Menu.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/swing/shadow/GraphicsUtilities.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/DataObat.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/PendaftaranPasien.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/swing/PanelShadow.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/main/Dashboard.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/DaftarPeriksa.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/chart/LabelColor.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/menu/EventMenu.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/Pemeriksaan.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/blankchart/NiceScale.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/main/Resep.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/themes/EventColorChange.java</file>
-            <file>jar:file:/D:/Dera/Project%20an/Klinik/NotificationAPI.jar!/.classpath</file>
-            <file>jar:file:/D:/Dera/Project%20an/Klinik/NotificationAPI.jar!/.project</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/Laporan.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/chart/CurveChart.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/themes/ThemeColorChange.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/swing/MenuButton.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/chart/LegendItem.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/blankchart/BlankPlotChatRender.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/components/MainBody.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/main/Login.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/blankchart/BlankPlotChart.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/blankchart/SeriesSize.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/form/TenagaMedis.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/chart/ModelChart.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/swing/shadow/ShadowRenderer.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/swing/ShadowType.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/configurations/koneksi.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/themes/ThemeColor.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/services/UserSession.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/app/themes/SystemTheme.java</file>
-            <file>file:/D:/Dera/Project%20an/Klinik/src/config.app</file>
+            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/form/TenagaMedis.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/form/Laporan.java</file>
+            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/report/Laporan%20Tenaga%20Medis.jrxml</file>
         </group>
     </open-files>
 </project-private>
