@@ -77,6 +77,7 @@ public class DaftarPeriksa extends javax.swing.JPanel {
 
         setOpaque(false);
 
+        table.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null},
@@ -95,12 +96,14 @@ public class DaftarPeriksa extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(table);
 
+        txtSearch.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txtSearchKeyReleased(evt);
             }
         });
 
+        btnResep.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnResep.setText("Lihat Resep");
         btnResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,6 +111,7 @@ public class DaftarPeriksa extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setText("Cari");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

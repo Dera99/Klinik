@@ -3,9 +3,32 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/form/TenagaMedis.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/form/Laporan.java</file>
-            <file>file:/C:/Users/user/Documents/GitHub/Klinik/src/app/report/Laporan%20Tenaga%20Medis.jrxml</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/components/MainBody.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/swing/scrollbar/ModernScrollBarUI.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/services/UserSession.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/swing/MenuButton.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/DataObat.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/Beranda.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/themes/SystemTheme.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/swing/PanelBackground.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/Pemeriksaan.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/configurations/config.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/PendaftaranPasien.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/menu/EventMenu.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/swing/RoundPanel.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/Laporan.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/main/Login.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/main/Dashboard.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/components/Form.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/TenagaMedis.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/services/Auth.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/main/Resep.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/themes/ImageAvatar.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/DaftarPeriksa.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/JadwalPelayanan.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/swing/scrollbar/ScrollBarCustom.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/form/Pengaturan.java</file>
+            <file>file:/C:/Users/Admin/Documents/GitHub/Klinik/src/app/menu/Menu.java</file>
         </group>
     </open-files>
 </project-private>

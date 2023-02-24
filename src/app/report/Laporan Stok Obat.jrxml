@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64120e3f-86ec-4d79-8035-6c4beaa5a713">
 	<property name="ireport.zoom" value="1.2100000000000073"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="59"/>
+	<property name="ireport.y" value="192"/>
 	<parameter name="no" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[1]]></defaultValueExpression>
 	</parameter>
@@ -38,7 +38,7 @@
 			<staticText>
 				<reportElement x="205" y="20" width="139" height="37" uuid="3b132454-66ac-46a5-b3ad-9b1dd5c76e82"/>
 				<textElement textAlignment="Center">
-					<font size="26" isBold="true" isStrikeThrough="false"/>
+					<font fontName="Times New Roman" size="26" isBold="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[dr. Fayrus]]></text>
 			</staticText>
@@ -53,32 +53,35 @@
 			<staticText>
 				<reportElement x="178" y="0" width="197" height="20" uuid="405448fb-dc1b-4878-89af-ef8a53648e19"/>
 				<textElement textAlignment="Center">
-					<font isStrikeThrough="false"/>
+					<font fontName="Times New Roman" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[DOKTER PRAKTEK KELUARGA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="166" y="57" width="228" height="20" uuid="3c92c03b-4052-47c5-a404-0f69a7504c22"/>
 				<textElement textAlignment="Center">
-					<font isStrikeThrough="false"/>
+					<font fontName="Times New Roman" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[440/050-1/dr/00730/DPMPTSP/2018]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="155" y="77" width="250" height="18" uuid="ae92cb37-4246-4f54-9286-b4ec1cf2349b"/>
 				<textElement textAlignment="Center">
-					<font isStrikeThrough="false"/>
+					<font fontName="Times New Roman" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Perumahan Cileungsi Indah]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="126" y="95" width="338" height="20" uuid="394c158c-bdb3-4c07-aa80-ffc12fe638c7"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Jl. Melati VII Blok C No. 92 RT 06 RW 09 Kec.Cileungsi. Kab. Bogor]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="155" y="115" width="250" height="18" uuid="4a02a35e-1283-4ab4-9d81-b0788951b5fb"/>
 				<textElement textAlignment="Center">
-					<font isBold="true" isStrikeThrough="false"/>
+					<font fontName="Times New Roman" isBold="true" isStrikeThrough="false"/>
 				</textElement>
 				<text><![CDATA[Telp/WA : 085920068006]]></text>
 			</staticText>
@@ -95,7 +98,7 @@
 			<staticText>
 				<reportElement x="205" y="15" width="212" height="20" uuid="4d79b216-7225-4f2e-8a11-d5086e54d8ab"/>
 				<textElement>
-					<font size="14" isBold="true"/>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[LAPORAN STOK OBAT]]></text>
 			</staticText>
@@ -111,12 +114,16 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="44" y="41" width="100" height="20" uuid="b65e4f48-96e8-42e3-8572-98bb7fabd64e"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Kode Obat]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="144" y="41" width="100" height="20" uuid="598ddd0d-612c-4f35-8463-e86e6d6b00eb"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Nama Obat]]></text>
 			</staticText>
 			<rectangle>
@@ -124,7 +131,9 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="474" y="41" width="81" height="20" uuid="bd3c8e72-df05-4e15-b011-6e8feb0f5533"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Expired]]></text>
 			</staticText>
 			<rectangle>
@@ -132,7 +141,9 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="0" y="41" width="44" height="20" uuid="a22e1037-c60f-4a32-8cb4-8ac0629ec623"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[No]]></text>
 			</staticText>
 			<rectangle>
@@ -140,7 +151,9 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="244" y="41" width="75" height="20" uuid="2974d2e3-6d15-4592-b9e4-a9346d186347"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Dosis]]></text>
 			</staticText>
 			<rectangle>
@@ -148,7 +161,9 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="319" y="41" width="75" height="20" uuid="36160aae-1583-43c7-9084-ee6445a2ab43"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Stok Obat]]></text>
 			</staticText>
 			<rectangle>
@@ -156,7 +171,9 @@
 			</rectangle>
 			<staticText>
 				<reportElement x="394" y="41" width="80" height="20" uuid="8782a4cf-c820-4aba-a1a6-3d25c4697486"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<text><![CDATA[Harga Obat]]></text>
 			</staticText>
 		</band>
@@ -171,12 +188,16 @@
 			</rectangle>
 			<textField>
 				<reportElement x="44" y="1" width="100" height="19" uuid="b0d86237-51c3-4a8c-9673-a5bded8c75dd"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id_obat}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd-MM-yyyy">
 				<reportElement x="474" y="1" width="81" height="19" uuid="501a5a0a-f053-4114-b5e3-c6341e4b31a8"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{expired}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -184,7 +205,9 @@
 			</rectangle>
 			<textField>
 				<reportElement x="144" y="1" width="100" height="19" uuid="26bedf77-944a-4ad8-ad9f-5081c28853f4"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nama_obat}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -193,7 +216,7 @@
 			<textField>
 				<reportElement x="0" y="2" width="44" height="18" uuid="791a2fff-14f8-4693-9fd5-0be536145e20"/>
 				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="10" isBold="false"/>
+					<font fontName="Times New Roman" size="10" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new Integer($V{Nomor}.intValue()+$P{no}.intValue())]]></textFieldExpression>
 			</textField>
@@ -202,7 +225,9 @@
 			</rectangle>
 			<textField>
 				<reportElement x="244" y="0" width="75" height="19" uuid="56daea4b-2e2f-43b5-ae43-80bb01df1c97"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{dosis}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -210,7 +235,9 @@
 			</rectangle>
 			<textField>
 				<reportElement x="319" y="1" width="75" height="18" uuid="b19c05f9-fe7f-4882-bf20-64c3d3000d05"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{jumlah}]]></textFieldExpression>
 			</textField>
 			<rectangle>
@@ -218,7 +245,9 @@
 			</rectangle>
 			<textField pattern="Rp #,##0">
 				<reportElement x="394" y="0" width="80" height="20" uuid="767363ce-7d4a-4814-98ee-ed7b3d519c9a"/>
-				<textElement textAlignment="Center"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{harga}]]></textFieldExpression>
 			</textField>
 		</band>
@@ -228,21 +257,21 @@
 			<staticText>
 				<reportElement x="358" y="105" width="197" height="18" forecolor="#000000" uuid="6bbc03c4-274e-4b37-affa-fb5c7fd4171f"/>
 				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[dr. Fayrus]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="358" y="34" width="197" height="18" forecolor="#000000" uuid="764106f0-0775-40c9-a168-328fb1a903bf"/>
 				<textElement textAlignment="Center">
-					<font fontName="SansSerif" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
 				</textElement>
 				<text><![CDATA[Penanggung Jawab]]></text>
 			</staticText>
 			<textField pattern="EEEEE dd MMMMM yyyy">
 				<reportElement x="358" y="14" width="197" height="20" forecolor="#000000" uuid="36c245ed-b6d7-4963-bf75-38f9bf26b8e7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="SansSerif" size="12" isBold="false"/>
+					<font fontName="Times New Roman" size="12" isBold="false"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Cileungsi, "+new SimpleDateFormat("EEEE, dd MMMM yyyy", new java.util.Locale("id")).format(new java.util.Date())]]></textFieldExpression>
 			</textField>

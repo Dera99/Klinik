@@ -245,6 +245,7 @@ public class Resep extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        table.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -268,16 +269,26 @@ public class Resep extends javax.swing.JFrame {
             table.getColumnModel().getColumn(0).setMaxWidth(0);
         }
 
+        txtResep.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setText("No Resep");
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("Nama Obat");
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Aturan Pakai");
 
+        txtAturan.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setText("Jumlah");
 
+        spinJumlah.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         spinJumlah.setModel(new javax.swing.SpinnerNumberModel(1, 1, 100, 1));
 
+        btnAdd.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnAdd.setText("Tambah");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -285,6 +296,7 @@ public class Resep extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton2.setText("Cetak");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,6 +304,7 @@ public class Resep extends javax.swing.JFrame {
             }
         });
 
+        btnEdit.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnEdit.setText("Ubah");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -299,6 +312,7 @@ public class Resep extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnDelete.setText("Hapus");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -306,11 +320,19 @@ public class Resep extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel5.setText("ID Periksa");
 
+        txtPeriksa.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setText("ID Pasien");
 
-        lbTitle.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        txtPasien.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        cbObat.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        lbTitle.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(50, 50, 50));
         lbTitle.setText("Resep Obat");
 
@@ -324,7 +346,7 @@ public class Resep extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -346,7 +368,7 @@ public class Resep extends javax.swing.JFrame {
                                 .addGap(1, 1, 1)))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 351, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 363, Short.MAX_VALUE)
                                 .addComponent(jButton2))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(70, 70, 70)
@@ -362,8 +384,8 @@ public class Resep extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(cbObat, 0, 123, Short.MAX_VALUE)))
-                                .addGap(0, 145, Short.MAX_VALUE)))))
+                                        .addComponent(cbObat, 0, 124, Short.MAX_VALUE)))
+                                .addGap(0, 159, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

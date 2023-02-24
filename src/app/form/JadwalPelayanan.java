@@ -208,6 +208,7 @@ public class JadwalPelayanan extends Form {
         jScrollPane3 = new javax.swing.JScrollPane();
         table2 = new javax.swing.JTable();
 
+        btnUpdate.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnUpdate.setText("Ubah");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -215,6 +216,7 @@ public class JadwalPelayanan extends Form {
             }
         });
 
+        table1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -233,6 +235,7 @@ public class JadwalPelayanan extends Form {
         });
         jScrollPane2.setViewportView(table1);
 
+        cbService.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         cbService.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Umum", "Bidan" }));
         cbService.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,16 +243,22 @@ public class JadwalPelayanan extends Form {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("Jenis Pelayanan");
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Nama");
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel4.setText("Pelayanan Dokter");
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel5.setText("Pelayanan Bidan");
 
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setText("Hari Kerja");
 
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel7.setText("Jam Pelayanan");
 
         jLabel8.setText(":");
@@ -260,10 +269,13 @@ public class JadwalPelayanan extends Form {
 
         jLabel11.setText(":");
 
+        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel12.setText("Jam Mulai");
 
+        jLabel13.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel13.setText("Jam Selesai");
 
+        btnDelete.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnDelete.setText("Hapus");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,6 +283,7 @@ public class JadwalPelayanan extends Form {
             }
         });
 
+        btnAdd.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnAdd.setText("Simpan");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -278,6 +291,15 @@ public class JadwalPelayanan extends Form {
             }
         });
 
+        txtHari.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        cbNama.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        mulai.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        selesai.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        table2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -362,7 +384,7 @@ public class JadwalPelayanan extends Form {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)

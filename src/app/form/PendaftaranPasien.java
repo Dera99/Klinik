@@ -144,6 +144,15 @@ public class PendaftaranPasien extends Form {
         dateChooser1.setDateFormat("yyyy-MM-dd");
         dateChooser1.setTextRefernce(txtTanggal);
 
+        txtNama.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        txtAlamat.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        txtTanggal.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        txtTelp.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        radioPribadi.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         radioPribadi.setText("Pribadi");
         radioPribadi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +160,7 @@ public class PendaftaranPasien extends Form {
             }
         });
 
+        radioBPJS.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         radioBPJS.setText("BPJS");
         radioBPJS.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,18 +168,27 @@ public class PendaftaranPasien extends Form {
             }
         });
 
+        txtKode.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("Nama");
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Tanggal Lahir");
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setText("Alamat");
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel5.setText("No. Telpon");
 
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setText("Jenis Pembayaran");
 
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel7.setText("Jenis Pelayanan");
 
+        radioBidan.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         radioBidan.setText("Bidan");
         radioBidan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,6 +196,7 @@ public class PendaftaranPasien extends Form {
             }
         });
 
+        radioDokter.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         radioDokter.setText("Umum");
         radioDokter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,9 +205,11 @@ public class PendaftaranPasien extends Form {
         });
 
         jButton1.setBackground(new java.awt.Color(196, 229, 236));
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton1.setText("Batal");
 
         jButton2.setBackground(new java.awt.Color(196, 229, 236));
+        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton2.setText("Simpan");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -195,12 +217,15 @@ public class PendaftaranPasien extends Form {
             }
         });
 
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel8.setText("Jenis Kelamin");
 
         cbGender.setBackground(new java.awt.Color(196, 229, 236));
+        cbGender.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         cbGender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laki-Laki", "Perempuan" }));
 
         btnCek.setBackground(new java.awt.Color(196, 229, 236));
+        btnCek.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnCek.setText("Cek");
         btnCek.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,6 +233,7 @@ public class PendaftaranPasien extends Form {
             }
         });
 
+        lblKode.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblKode.setText("Kode BPJS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -245,7 +271,7 @@ public class PendaftaranPasien extends Form {
                             .addComponent(radioBidan)
                             .addComponent(radioDokter)
                             .addComponent(jLabel7))))
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1)

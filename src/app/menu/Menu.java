@@ -75,7 +75,7 @@ public class Menu extends javax.swing.JPanel {
         addMenu("Tenaga Medis", null,6);
         addMenu("Laporan", null,7);
         addMenu("Pengaturan", null,8);
-        addMenu("Logout",null,9);
+        addMenu("Keluar",null,9);
        }else{
         addMenu("Beranda", null, 0);
         //addMenu("Pendaftaran Pasien", null, 1);
@@ -86,7 +86,7 @@ public class Menu extends javax.swing.JPanel {
         //addMenu("Tenaga Medis", null,6);
         //addMenu("Laporan", null,7);
         addMenu("Pengaturan", null,8);
-        addMenu("Logout",null,9);
+        addMenu("Keluar",null,9);
        }
     }
     private void initMenu() {

@@ -75,16 +75,27 @@ public class Pengaturan extends Form {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTabbedPane4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jTabbedPane4.setAutoscrolls(true);
+        jTabbedPane4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
 
         panel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setText("Password Lama");
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel1.setText("Kata Sandi Lama");
 
-        jLabel2.setText("Password Baru");
+        txtOld.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
 
-        jLabel3.setText("Konfirmasi Password");
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel2.setText("Kata Sandi Baru");
 
+        txtNew.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel3.setText("Konfirmasi Kata Sandi");
+
+        txtKonfir.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton1.setText("Simpan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +103,8 @@ public class Pengaturan extends Form {
             }
         });
 
-        jButton2.setText("Clear");
+        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jButton2.setText("Hapus");
 
         javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
         panel1.setLayout(panel1Layout);
@@ -115,7 +127,7 @@ public class Pengaturan extends Form {
                             .addComponent(txtKonfir, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNew, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtOld, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,10 +148,10 @@ public class Pengaturan extends Form {
                 .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
 
-        jTabbedPane4.addTab("Ubah Password", panel1);
+        jTabbedPane4.addTab("Ubah Kata Sandi", panel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

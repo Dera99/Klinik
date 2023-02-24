@@ -137,6 +137,7 @@ public class Pemeriksaan extends Form {
         jLabel6 = new javax.swing.JLabel();
         btnResep = new javax.swing.JButton();
 
+        table.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -160,18 +161,30 @@ public class Pemeriksaan extends Form {
             table.getColumnModel().getColumn(4).setHeaderValue("Tanggal");
         }
 
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel1.setText("ID Periksa");
 
+        txtPeriksa.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("ID Pasien");
 
+        txtPasien.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        txtMedis.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("ID Tenaga Medis");
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setText("Diagnosa");
 
         txtDiagnosa.setColumns(20);
+        txtDiagnosa.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtDiagnosa.setRows(5);
         jScrollPane2.setViewportView(txtDiagnosa);
 
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton1.setText("Simpan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,6 +192,7 @@ public class Pemeriksaan extends Form {
             }
         });
 
+        table1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -197,12 +211,13 @@ public class Pemeriksaan extends Form {
         });
         jScrollPane3.setViewportView(table1);
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel5.setText("Rekam Medis Pasien");
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel6.setText("Daftar Pemeriksaan Pasien");
 
+        btnResep.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnResep.setText("Resep");
         btnResep.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +286,7 @@ public class Pemeriksaan extends Form {
                     .addComponent(jButton1)
                     .addComponent(btnResep))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

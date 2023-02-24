@@ -230,6 +230,7 @@ public class TenagaMedis extends Form {
 
         setBackground(new java.awt.Color(241, 253, 243));
 
+        table.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -245,10 +246,13 @@ public class TenagaMedis extends Form {
         });
         jScrollPane2.setViewportView(table);
 
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel3.setText("Nama");
 
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel7.setText("Email");
 
+        jButton3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton3.setText("Ubah");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +262,7 @@ public class TenagaMedis extends Form {
 
         jLabel9.setText(":");
 
+        jButton4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton4.setText("Tambah");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -269,6 +274,9 @@ public class TenagaMedis extends Form {
 
         jLabel11.setText(":");
 
+        txtEmail.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton2.setText("Hapus");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,33 +284,47 @@ public class TenagaMedis extends Form {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setText("Alamat");
 
         txtAlamat.setColumns(20);
+        txtAlamat.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtAlamat.setRows(5);
         jScrollPane3.setViewportView(txtAlamat);
 
+        txtNama.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
         jLabel12.setText(":");
 
+        txtTelp.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel8.setText("No Telp");
 
+        jLabel13.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel13.setText("Profesi");
 
         jLabel14.setText(":");
 
+        txtProfesi.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         txtProfesi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dokter Umum", "Bidan", "Admin" }));
 
+        lblUser.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         lblUser.setText("Username");
 
         titik.setText(":");
 
-        jButton5.setText("Refresh");
+        txtUser.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jButton5.setText("Kosongkan");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
+        btnCetak.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         btnCetak.setText("Cetak");
         btnCetak.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,12 +369,12 @@ public class TenagaMedis extends Form {
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(txtNama, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel13)
                                     .addComponent(lblUser))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)

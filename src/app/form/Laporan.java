@@ -190,15 +190,24 @@ public class Laporan extends Form {
         dateChooser8.setDateFormat("yyyy-MM-dd");
         dateChooser8.setTextRefernce(txtSampai2);
 
+        jTabbedPane4.setFont(new java.awt.Font("SansSerif", 0, 14)); // NOI18N
+
         panel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel1.setText("Pilih Periode Pasien");
 
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel2.setText("Mulai");
 
+        jLabel4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel4.setText("Sampai");
 
+        txtMulai1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        txtSampai1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton1.setText("Cetak");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +233,7 @@ public class Laporan extends Form {
                         .addComponent(txtSampai1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jButton1)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(376, Short.MAX_VALUE))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -238,20 +247,27 @@ public class Laporan extends Form {
                     .addComponent(txtMulai1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSampai1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Data Pasien BPJS", panel1);
 
         panel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel3.setText("Pilih Periode Pasien");
 
+        jLabel5.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel5.setText("Mulai");
 
+        txtMulai2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel6.setText("Sampai");
 
+        txtSampai2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton2.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton2.setText("Cetak");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -277,7 +293,7 @@ public class Laporan extends Form {
                         .addComponent(txtSampai2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jButton2)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(376, Short.MAX_VALUE))
         );
         panel2Layout.setVerticalGroup(
             panel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,20 +307,27 @@ public class Laporan extends Form {
                     .addComponent(txtMulai2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSampai2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Data Pasien Non-BPJS", panel2);
 
         panel3.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         jLabel7.setText("Pilih Periode Pemeriksaan");
 
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel8.setText("Mulai");
 
+        txtMulai3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jLabel9.setText("Sampai");
 
+        txtSampai3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+
+        jButton3.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton3.setText("Cetak");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,7 +353,7 @@ public class Laporan extends Form {
                         .addComponent(txtSampai3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jButton3)))
-                .addContainerGap(381, Short.MAX_VALUE))
+                .addContainerGap(376, Short.MAX_VALUE))
         );
         panel3Layout.setVerticalGroup(
             panel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,13 +367,14 @@ public class Laporan extends Form {
                     .addComponent(txtMulai3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtSampai3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
-                .addContainerGap(289, Short.MAX_VALUE))
+                .addContainerGap(292, Short.MAX_VALUE))
         );
 
         jTabbedPane4.addTab("Data Pemeriksaan", panel3);
 
         panel4.setBackground(new java.awt.Color(255, 255, 255));
 
+        jButton4.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         jButton4.setText("Cetak");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -358,6 +382,7 @@ public class Laporan extends Form {
             }
         });
 
+        table.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -381,7 +406,7 @@ public class Laporan extends Form {
         panel4Layout.setHorizontalGroup(
             panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel4Layout.createSequentialGroup()
-                .addContainerGap(825, Short.MAX_VALUE)
+                .addContainerGap(823, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(55, 55, 55))
             .addGroup(panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +420,7 @@ public class Laporan extends Form {
             .addGroup(panel4Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(jButton4)
-                .addContainerGap(339, Short.MAX_VALUE))
+                .addContainerGap(336, Short.MAX_VALUE))
             .addGroup(panel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(panel4Layout.createSequentialGroup()
                     .addGap(110, 110, 110)
